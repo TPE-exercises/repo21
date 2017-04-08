@@ -204,6 +204,9 @@ public class BBaumNode {
 
 	
 	public int height(){
+		if(pointer[0] ==  null){
+			return 1;
+		}
 		BBaumNode node = pointer[0];
 		int height = 1;
 		while(node != null){
