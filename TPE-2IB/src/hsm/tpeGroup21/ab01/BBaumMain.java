@@ -7,13 +7,26 @@ public class BBaumMain {
 		
 		
 		test.insert(1);
+		test.printInorder();
 		test.insert(2);
-
-
+		test.printInorder();
+		test.insert(4);
+		test.printInorder();
+		test.insert(3);
+		test.printInorder();
+		test.insert(13);
+		test.printInorder();
+		test.insert(8);
+		test.printInorder();
+		test.insert(7);
+		test.printInorder();
+		test.insert(16);
+		test.printInorder();
+		test.insert(13);
+		test.printInorder();
+		test.insert(-2);
 		
-		println(test.height());
-		
-	//	test.printInorder();
+		test.printInorder();
 	//	test.printPostorder();
 	//	test.printPreorder();
 	//	test.printLevelorder();

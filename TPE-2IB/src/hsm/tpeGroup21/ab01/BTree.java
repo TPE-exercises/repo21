@@ -49,8 +49,7 @@ public class BTree implements BBaum {
 
 	
 	public boolean contains(Integer o) {
-		//return wurzel.contains(o);
-		return false;
+		return wurzel.contains(o);
 	}
 
 	

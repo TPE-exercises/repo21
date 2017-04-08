@@ -125,9 +125,12 @@ public class BBaumNode {
 		}
 	}
 
-	public boolean insert(int value, BBaumNode node) {
-		// TODO: werte an richtig stelle inserten(nicht immer wurzel)
+	public boolean insert(int value, BBaumNode node) {		
 		for (int i = 0; i < maxValues + 1; i++) {
+			//if its not
+			if (values[i]!=null && values[i]>value && pointer[i]!=null){
+				return pointer[i].insert(value,node);
+			}
 			if (values[i] == null) {
 				values[i] = value;
 				insertionSort();
