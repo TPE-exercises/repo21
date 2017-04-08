@@ -1,5 +1,7 @@
 package tpe.hsm.ab01;
 
+import static gdi.MakeItSimple.*;
+
 public class BBaumNode {
 
 	public static final int LEAF = 0;
@@ -85,41 +87,28 @@ public class BBaumNode {
 		return null;
 	}
 
-	/*public boolean contains(Integer o) {
-		if (pointer[0] != null) {
-			for (int i = 0; i < maxValues; i++) {
-				if(values[i] == o){
-					return true;
-				}else if(values[i] > o){
-					return pointer[i].contains(o);
-				} else if(values[i] < o){
-					return pointer[i+1].contains(o);
-				}
-			}
-		} else {
-			for (int i = 0; i < maxValues; i++) {
-				if (values[i] == o) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	*/
-
 	/**
 	 * @param to
 	 *            search Integer o
 	 * @return true, if node or nodes under it contain o
 	 */
-	/*
-	 * public boolean contains(Integer o) { // search all values and pointer for
-	 * (int i = 0; i < pointer.length; i++) { if (values[i] == null) { // end of
-	 * values, one pointer left if (pointer[i] == null) { return false; } else
-	 * return pointer[i].contains(o); } else if (values[i] == o) { return true;
-	 * } else if (values[i] > o) { return pointer[i].contains(o); } } return
-	 * false; }
-	 */
+
+	public boolean contains(Integer o) {
+		// search all values and pointer
+		for (int i = 0; i < pointer.length; i++) {
+			if (values[i] == null) { // end of values, one pointer left
+				if (pointer[i] == null) {
+					return false;
+				} else
+					return pointer[i].contains(o);
+			} else if (values[i] == o) {
+				return true;
+			} else if (values[i] > o) {
+				return pointer[i].contains(o);
+			}
+		}
+		return false;
+	}
 
 	/**
 	 * sort pointer of a node with insertionsort
@@ -182,15 +171,16 @@ public class BBaumNode {
 		return ret;
 	}
 
+	// gibt zz falsche sachen aus D:
 	public Integer getMax() {
 		if (pointer[0] != null) {
-			for (int i = pointer.length-1; i >= 0; i--) {
+			for (int i = pointer.length - 1; i >= 0; i--) {
 				if (pointer[i] != null) {
 					return pointer[i].getMax();
 				}
 			}
 		} else {
-			for (int i = values.length-1; i >= 0; i--) {
+			for (int i = values.length - 1; i >= 0; i--) {
 				if (values[i] != null) {
 					return values[i];
 				}
@@ -211,4 +201,50 @@ public class BBaumNode {
 
 		return null;
 	}
+
+	public int height() {
+		
+	}
+
+	public void printLevelorder() {
+		// TODO dann mach ich mal die height funktion
+	}
+
+	public void printInorder() {
+		for (int i = 0; i < pointer.length; i++) {
+			if (pointer[i] != null) {
+				pointer[i].printInorder();
+			}
+			if (i < values.length && values[i] != null) {
+				print(values[i] + " ");
+			}
+		}
+	}
+
+	public void printPostorder() {
+		for (int i = 0; i < pointer.length; i++) {
+			if (pointer[i] != null) {
+				pointer[i].printPostorder();
+			}
+		}
+		for (int i = 0; i < values.length; i++) {
+			if (values[i] != null) {
+				print(values[i] + " ");
+			}
+		}
+	}
+
+	public void printPreorder() {
+		for (int i = 0; i < values.length; i++) {
+			if (values[i] != null) {
+				print(values[i] + " ");
+			}
+		}
+		for (int i = 0; i < pointer.length; i++) {
+			if (pointer[i] != null) {
+				pointer[i].printPreorder();
+			}
+		}
+	}
+
 }

@@ -49,7 +49,8 @@ public class BTree implements BBaum {
 
 	
 	public boolean contains(Integer o) {
-		return wurzel.contains(o);
+		//return wurzel.contains(o);
+		return false;
 	}
 
 	
@@ -60,8 +61,7 @@ public class BTree implements BBaum {
 
 	
 	public int height() {
-		// TODO Auto-generated method stub
-		return 0;
+		return wurzel.height();
 	}
 
 	
@@ -88,27 +88,30 @@ public class BTree implements BBaum {
 
 	
 	public void printInorder() {
-		// TODO Auto-generated method stub
-		println(wurzel.toString());
-		
+		print("Inorder: ");
+		wurzel.printInorder();
+		println();
 	}
 
 	
 	public void printPostorder() {
-		// TODO Auto-generated method stub
-		
+		print("Postorder: ");
+		wurzel.printPostorder();
+		println();
 	}
 
 	
 	public void printPreorder() {
-		// TODO Auto-generated method stub
-		
+		print("Preorder: ");
+		wurzel.printPreorder();
+		println();	
 	}
 
 	
 	public void printLevelorder() {
-		// TODO Auto-generated method stub
-		
+		print("Levelorder: ");
+		wurzel.printLevelorder();
+		println();
 	}
 
 
