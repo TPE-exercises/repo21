@@ -37,6 +37,16 @@ public class BBaumMain {
 		test.printInorder();
 		test.insert(14);
 		test.printInorder();
+		test.insert(12);
+		test.printInorder();
+		test.insert(16);
+		test.printInorder();
+		test.insert(17);
+		test.printInorder();
+		test.insert(18);
+		test.printInorder();
+		test.insert(19);
+		test.printInorder();
 		
 	//	test.printPostorder();
 	//	test.printPreorder();

@@ -3,8 +3,6 @@ package hsm.tpeGroup21.ab01;
 import static gdi.MakeItSimple.*;
 
 public class BTree implements BBaum {
-	public static final int LEAF = 0;
-	public static final int NOLEAF = 1;
 	
 	//Attribute
 	private int ordnung;
@@ -13,7 +11,7 @@ public class BTree implements BBaum {
 	//Konstruktoren
 	BTree(int ordnung){
 		this.ordnung = ordnung;
-		wurzel = new BBaumNode(ordnung, LEAF);
+		wurzel = new BBaumNode(ordnung);
 	}
 	
 	BTree(int ordnung, String filename){
@@ -32,8 +30,8 @@ public class BTree implements BBaum {
 		if(contains(o)){
 			return false;
 		}
-		BBaumNode dummy = new BBaumNode(this.ordnung, NOLEAF);
-		boolean temp = wurzel.insert(o,dummy);
+		BBaumNode dummy = new BBaumNode(this.ordnung);
+		boolean temp = wurzel.insert(o,false,dummy);
 		if(dummy.getValues()[0] != null){
 			wurzel = dummy;
 		}

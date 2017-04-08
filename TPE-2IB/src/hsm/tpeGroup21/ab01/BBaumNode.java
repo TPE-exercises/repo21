@@ -3,27 +3,21 @@ package hsm.tpeGroup21.ab01;
 import static gdi.MakeItSimple.*;
 
 public class BBaumNode {
-
-	public static final int LEAF = 0;
-	public static final int NOLEAF = 1;
-
 	// Attr
 	private int maxValues;
-	private int isLeaf;
 	private Integer[] values;
 	private BBaumNode[] pointer;
-	private BBaumNode parent;
+	private BBaumNode parent = null;
 
 	// Konstr
-	BBaumNode(int ordnung, int isLeaf) {
+	BBaumNode(int ordnung) {
 		maxValues = ordnung * 2;
-		this.isLeaf = isLeaf;
 		values = new Integer[maxValues + 1];
 		pointer = new BBaumNode[maxValues + 1];
 	}
 
-	BBaumNode(int ordnung, int isLeaf, BBaumNode parent) {
-		this(ordnung, isLeaf);
+	BBaumNode(int ordnung, BBaumNode parent) {
+		this(ordnung);
 		this.parent = parent;
 	}
 
@@ -31,14 +25,23 @@ public class BBaumNode {
 	public Integer[] getValues() {
 		return values;
 	}
-
+	
+	public int getPointerNumber(int value){
+		for(int i = 0; i < maxValues +1; i++){
+			if(pointer[i].values[0]== value){
+				return i;
+			}
+		}
+		return -1;
+	}
+	
 	// methods
 
 	/**
 	 * adds new pointer
 	 * 
 	 * @param node
-	 *            to insert
+	 *            to insert         
 	 */
 	public void addPointer(BBaumNode toInsert) {
 		for (int i = 0; i < maxValues + 1; i++) {
@@ -60,26 +63,36 @@ public class BBaumNode {
 	/**
 	 * split the node, mid get inserted in parent, parent gets new pointer
 	 * 
-	 * @param node
-	 *            to split
-	 * @return null, if there was an parent before, else the new parent/wurzel
+	 * @param node dummy, if there is no parent, it becomes new root
+	 * @return null, if there was an parent before, else return node
 	 */
 	public BBaumNode burst(BBaumNode node) {
 		int mid = maxValues / 2;
-		BBaumNode leftNode = new BBaumNode(maxValues / 2, this.isLeaf);
-		BBaumNode rightNode = new BBaumNode(maxValues / 2, this.isLeaf);
-		for (int i = 0; i < mid; i++) {
-			leftNode.insert(values[i], node);
-		}
-		for (int i = mid + 1; i < maxValues+1; i++) {
-			rightNode.insert(values[i], node);
-		}
 		if (parent != null) {
-			parent.insert(values[mid], node);
-			parent.addPointer(leftNode);
+			//if there is already a parent, the full node gets split
+			BBaumNode leftNode = new BBaumNode(maxValues / 2, parent);
+			BBaumNode rightNode = new BBaumNode(maxValues / 2, parent);
+			for (int i = 0; i < mid; i++) {
+				leftNode.insert(values[i],false, node);
+			}
+			for (int i = mid + 1; i < maxValues+1; i++) {
+				rightNode.insert(values[i],false, node);
+			}
+			parent.insert(values[mid],true, node);
+			int placeForLeft = parent.getPointerNumber(values[0]);
+			parent.pointer[placeForLeft] = leftNode;
 			parent.addPointer(rightNode);
 		} else {
-			node.insert(values[mid], node);
+			//if there is no parent, node becomes the new root
+			BBaumNode leftNode = new BBaumNode(maxValues / 2, node);
+			BBaumNode rightNode = new BBaumNode(maxValues / 2, node);
+			for (int i = 0; i < mid; i++) {
+				leftNode.insert(values[i],false, node);
+			}
+			for (int i = mid + 1; i < maxValues+1; i++) {
+				rightNode.insert(values[i], false, node);
+			}
+			node.insert(values[mid],false, node);
 			node.pointer[0] = leftNode;
 			node.pointer[1] = rightNode;
 			return node;
@@ -117,10 +130,8 @@ public class BBaumNode {
 	 * sort pointer of a node with insertionsort
 	 */
 	private void sortPointer() {
-		for (int i = maxValues + 1; i > 0; i--) {
-			if (pointer[i] == null) {
-				return;
-			} else if (pointer[i - 1].values[0] > pointer[i].values[0]) {
+		for (int i = maxValues; i > 0; i--) {
+			if (pointer [i] != null && pointer[i - 1].values[0] > pointer[i].values[0]) {
 				BBaumNode temp = pointer[i - 1];
 				pointer[i - 1] = pointer[i];
 				pointer[i] = temp;
@@ -128,31 +139,49 @@ public class BBaumNode {
 		}
 	}
 
-	public boolean insert(int value, BBaumNode node) {		
-		for (int i = 0; i < maxValues + 1; i++) {
-			//if its not
-			if (values[i]!=null && values[i]>value && pointer[i]!=null){
-				return pointer[i].insert(value,node);
-			}
-			if (values[i] == null) {
-				values[i] = value;
-				insertionSort();
-				if (isFull()) {
-					burst(node);
+	/**
+	 * 
+	 * @param value gets inserted
+	 * @param burst if true: forced to insert in this node
+	 * @param node dummy node, if there is no parent, it becomes the new root
+	 * @return true  if it was succesfull,
+	 * 	 false if it wasnt succesfull	
+	 */
+	public boolean insert(int value, boolean burst, BBaumNode node) {
+		if(pointer[0]==null || burst){
+			for(int i = 0; i < maxValues +1; i++){
+				if (values[i] == null) {
+					values[i] = value;
+					insertionSort();
+					if (isFull()) {
+						burst(node);
+						return true;
+					}
 					return true;
-				}
-				return true;
+				}	
 			}
 		}
+		else{
+			for (int i = 0; i < maxValues + 1; i++) {
+				if(values[i]==null){
+					return pointer[i].insert(value,false,node);
+				}
+				if (values[i]>value){
+					return pointer[i].insert(value,false,node);
+				}
+			}
+		}	
 		return false;
 	}
-
+	/**
+	 * sorts values by insertion sort
+	 */
 	public void insertionSort() {
-		int lastInsertion = maxValues - 1;
-		for (int i = 0; i < maxValues; i++) {
+		int lastInsertion = maxValues;
+		for (int i = 0; i < maxValues +1; i++) {
 			if (values[i] == null) {
 				lastInsertion = i - 1;
-				i = maxValues;
+				i = maxValues + 1;
 			}
 		}
 		for (int i = lastInsertion; i > 0; i--) {
