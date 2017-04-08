@@ -61,7 +61,7 @@ public class BTree implements BBaum {
 
 	
 	public int height() {
-		return wurzel.height();
+	return wurzel.height();
 	}
 
 	

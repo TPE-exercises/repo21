@@ -202,7 +202,15 @@ public class BBaumNode {
 		return null;
 	}
 
-	public int height() {
+	
+	public int height(){
+		BBaumNode node = pointer[0];
+		int height = 1;
+		while(node != null){
+			height++;
+			node = node.pointer[0];
+		}
+		return height;
 		
 	}
 

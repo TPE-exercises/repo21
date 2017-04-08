@@ -10,6 +10,17 @@ public class BBaumMain {
 		test.insert(2);
 		test.insert(3);
 		test.insert(4);
+		test.insert(1);
+		test.insert(2);
+		test.insert(3);
+		test.insert(4);
+		test.insert(1);
+		test.insert(2);
+		test.insert(3);
+		test.insert(4);
+		test.insert(1);
+		test.insert(2);
+		test.insert(3);
 
 		
 		println(test.height());
