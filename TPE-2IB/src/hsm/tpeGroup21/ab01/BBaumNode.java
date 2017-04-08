@@ -71,7 +71,7 @@ public class BBaumNode {
 		for (int i = 0; i < mid; i++) {
 			leftNode.insert(values[i], node);
 		}
-		for (int i = mid + 1; i < maxValues; i++) {
+		for (int i = mid + 1; i < maxValues+1; i++) {
 			rightNode.insert(values[i], node);
 		}
 		if (parent != null) {
@@ -104,7 +104,10 @@ public class BBaumNode {
 			} else if (values[i] == o) {
 				return true;
 			} else if (values[i] > o) {
-				return pointer[i].contains(o);
+				if(pointer[i]==null){
+					return false;
+				}else
+					return pointer[i].contains(o);
 			}
 		}
 		return false;
@@ -225,6 +228,7 @@ public class BBaumNode {
 	}
 
 	public void printInorder() {
+		print("(");
 		for (int i = 0; i < pointer.length; i++) {
 			if (pointer[i] != null) {
 				pointer[i].printInorder();
@@ -233,6 +237,7 @@ public class BBaumNode {
 				print(values[i] + " ");
 			}
 		}
+		print(")");
 	}
 
 	public void printPostorder() {

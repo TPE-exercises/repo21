@@ -5,28 +5,39 @@ public class BBaumMain {
 	public static void main(String[] args) {
 		BTree test = new BTree(2);
 		
-		
-		test.insert(1);
+		test.insert(5);
 		test.printInorder();
-		test.insert(2);
-		test.printInorder();
-		test.insert(4);
+		test.insert(6);
 		test.printInorder();
 		test.insert(3);
 		test.printInorder();
+		test.insert(10);
+		test.printInorder();
 		test.insert(13);
+		test.printInorder();
+		test.insert(1);
+		test.printInorder();
+		test.insert(2);
 		test.printInorder();
 		test.insert(8);
 		test.printInorder();
 		test.insert(7);
 		test.printInorder();
-		test.insert(16);
+		test.insert(11);
 		test.printInorder();
-		test.insert(13);
+		test.insert(9);
 		test.printInorder();
-		test.insert(-2);
+		test.insert(4);
+		test.printInorder();
+		test.insert(3);
+		test.printInorder();
+		test.insert(20);
+		test.printInorder();
+		test.insert(15);
+		test.printInorder();
+		test.insert(14);
+		test.printInorder();
 		
-		test.printInorder();
 	//	test.printPostorder();
 	//	test.printPreorder();
 	//	test.printLevelorder();

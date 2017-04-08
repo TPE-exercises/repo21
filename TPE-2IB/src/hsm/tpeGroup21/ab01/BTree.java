@@ -29,10 +29,9 @@ public class BTree implements BBaum {
 	}
 	
 	public boolean insert(Integer o) {
-		//TODO contains wieder rein kloppen 
-		//if(contains(o)){
-		//	return false;
-		//}
+		if(contains(o)){
+			return false;
+		}
 		BBaumNode dummy = new BBaumNode(this.ordnung, NOLEAF);
 		boolean temp = wurzel.insert(o,dummy);
 		if(dummy.getValues()[0] != null){
@@ -41,10 +40,14 @@ public class BTree implements BBaum {
 		return temp;
 	}
 		
-	
 	public boolean insert(String filename) {
-		// TODO Auto-generated method stub
-		return false;
+		Object file = openInputFile(filename);
+		boolean temp = true;
+		while (!isEndOfInputFile(file)) {
+			temp = insert(readInt(file)) && temp;
+		}
+		closeInputFile(file);
+		return temp;
 	}
 
 	
