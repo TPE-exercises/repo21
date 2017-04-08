@@ -1,5 +1,5 @@
+package hsm.tpeGroup21.ab01;
 
-package tpe.hsm.ab01;
 import static gdi.MakeItSimple.*;
 
 public class BTree implements BBaum {
