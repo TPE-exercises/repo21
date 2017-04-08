@@ -85,28 +85,41 @@ public class BBaumNode {
 		return null;
 	}
 
+	/*public boolean contains(Integer o) {
+		if (pointer[0] != null) {
+			for (int i = 0; i < maxValues; i++) {
+				if(values[i] == o){
+					return true;
+				}else if(values[i] > o){
+					return pointer[i].contains(o);
+				} else if(values[i] < o){
+					return pointer[i+1].contains(o);
+				}
+			}
+		} else {
+			for (int i = 0; i < maxValues; i++) {
+				if (values[i] == o) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	*/
+
 	/**
 	 * @param to
 	 *            search Integer o
 	 * @return true, if node or nodes under it contain o
 	 */
-	public boolean contains(Integer o) {
-		// search all values and pointer
-		for (int i = 0; i < pointer.length; i++) {
-			if (values[i] == null) {
-				// end of values, one pointer left
-				if (pointer[i] == null) {
-					return false;
-				} else
-					return pointer[i].contains(o);
-			} else if (values[i] == o) {
-				return true;
-			} else if (values[i] > o) {
-				return pointer[i].contains(o);
-			}
-		}
-		return false;
-	}
+	/*
+	 * public boolean contains(Integer o) { // search all values and pointer for
+	 * (int i = 0; i < pointer.length; i++) { if (values[i] == null) { // end of
+	 * values, one pointer left if (pointer[i] == null) { return false; } else
+	 * return pointer[i].contains(o); } else if (values[i] == o) { return true;
+	 * } else if (values[i] > o) { return pointer[i].contains(o); } } return
+	 * false; }
+	 */
 
 	/**
 	 * sort pointer of a node with insertionsort

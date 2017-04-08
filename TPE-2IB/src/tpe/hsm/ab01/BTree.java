@@ -30,7 +30,7 @@ public class BTree implements BBaum {
 	
 	public boolean insert(Integer o) {
 		//TODO contains wieder rein kloppen 
-		//if(!contains(o)){
+		//if(contains(o)){
 		//	return false;
 		//}
 		BBaumNode dummy = new BBaumNode(this.ordnung, NOLEAF);
