@@ -55,13 +55,12 @@ public class BTree implements BBaum {
 
 	
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return wurzel.getSize();
 	}
 
 	
 	public int height() {
-	return wurzel.height();
+		return wurzel.height();
 	}
 
 	
@@ -76,8 +75,12 @@ public class BTree implements BBaum {
 
 	
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		if(wurzel == null || wurzel.getValues()[0]==null){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 	

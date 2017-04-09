@@ -27,6 +27,20 @@ public class BBaumNode {
 		return values;
 	}
 	
+	public int getSize(){
+		int sum = 0;
+		for(int i = 0; i < values.length; i++){
+			if(values[i]!= null){
+				sum++;
+			}
+		}
+		for(int i = 0; i < pointer.length; i++){
+			if(pointer[i]!= null){
+				sum += pointer[i].getSize();
+			}
+		}
+		return sum;
+	}
 	/**
 	 * @param value to search in the pointer
 	 * @return position of pointer with the "value"
@@ -242,7 +256,6 @@ public class BBaumNode {
 		return ret;
 	}
 
-	// gibt zz falsche sachen aus D:
 	public Integer getMax() {
 		if (pointer[0] != null) {
 			for (int i = pointer.length - 1; i >= 0; i--) {
@@ -278,14 +291,9 @@ public class BBaumNode {
 		if(pointer[0] ==  null){
 			return 1;
 		}
-		BBaumNode node = pointer[0];
-		int height = 1;
-		while(node != null){
-			height++;
-			node = node.pointer[0];
-		}
-		return height;
-		
+		else{
+			return 1 + pointer[0].height();
+		}		
 	}
 
 	public void printLevelorder() {
@@ -306,6 +314,7 @@ public class BBaumNode {
 	}
 
 	public void printPostorder() {
+		print("(");
 		for (int i = 0; i < pointer.length; i++) {
 			if (pointer[i] != null) {
 				pointer[i].printPostorder();
@@ -316,9 +325,11 @@ public class BBaumNode {
 				print(values[i] + " ");
 			}
 		}
+		print(")");
 	}
 
 	public void printPreorder() {
+		print("(");
 		for (int i = 0; i < values.length; i++) {
 			if (values[i] != null) {
 				print(values[i] + " ");
@@ -329,5 +340,6 @@ public class BBaumNode {
 				pointer[i].printPreorder();
 			}
 		}
+		print(")");
 	}
 }
