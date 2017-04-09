@@ -3,11 +3,10 @@ import static gdi.MakeItSimple.*;
 public class BBaumMain {
 
 	public static void main(String[] args) {
-		BTree test = new BTree(10);
-		//test.insert("rndmNmbrs.txt");
+		BTree test = new BTree(2);
 		test.insert("rndmNmbrs.txt");
-		println("Contain 2: " + test.contains(2));
-		//	test.printLevelorder();
+		println("Height: "+ test.height());
+		test.printLevelorder();
 	}
 
 }

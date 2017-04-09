@@ -168,7 +168,7 @@ public class BBaumNode {
 			if(values[i]!= null && o == values[i]){
 				return true;
 			}
-			else if(i < values[i]||values[i] == null || i == values.length -1){
+			else if(values[i] == null || i < values[i] || i == values.length -1){
 				if(pointer[i]!= null){
 					return pointer[i].contains(o);
 				}
@@ -247,7 +247,7 @@ public class BBaumNode {
 		String ret = "(";
 		for (int i = 0; i < maxValues; i++) {
 			if (values[i] != null) {
-				ret = ret + values[i] + ";";
+				ret = ret + values[i] + " ";
 			}
 		}
 		ret = ret + ")";
@@ -295,7 +295,23 @@ public class BBaumNode {
 	}
 
 	public void printLevelorder() {
-		// TODO dann mach ich mal die height funktion
+		for(int i = 0; i < height(); i++){
+			printLevel(i);
+			println();
+		}
+	}
+	
+	public void printLevel(int lvl){
+		if(lvl == 0){
+			print(toString());
+		}
+		else{
+			for(int i = 0; i < pointer.length; i++){
+				if(pointer[i]!= null){
+					pointer[i].printLevel(lvl-1);
+				}
+			}
+		}
 	}
 
 	public void printInorder() {

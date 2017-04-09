@@ -106,28 +106,28 @@ public class BTree implements BBaum {
 
 	
 	public void printInorder() {
-		print("Inorder: ");
+		println("Inorder: ");
 		wurzel.printInorder();
 		println();
 	}
 
 	
 	public void printPostorder() {
-		print("Postorder: ");
+		println("Postorder: ");
 		wurzel.printPostorder();
 		println();
 	}
 
 	
 	public void printPreorder() {
-		print("Preorder: ");
+		println("Preorder: ");
 		wurzel.printPreorder();
 		println();	
 	}
 
 	
 	public void printLevelorder() {
-		print("Levelorder: ");
+		println("Levelorder: ");
 		wurzel.printLevelorder();
 		println();
 	}
