@@ -50,6 +50,8 @@ public class TestBBaum {
 		if(!testTree.insert(1)){
 			insertFailed = true;
 		}
+		
+		
 		assertEquals(true, insertFailed);
 		
 	}

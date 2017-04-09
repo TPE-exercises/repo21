@@ -9,6 +9,7 @@ public interface BBaum {
 	
 	/**
 	 * @param filename of file to insert
+	 * 
 	 * @return boolean, true if insertion was successful
 	 */
 	boolean insert (String filename);

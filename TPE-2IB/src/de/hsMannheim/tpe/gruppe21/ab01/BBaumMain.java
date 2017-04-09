@@ -127,8 +127,8 @@ public class BBaumMain {
 
 	public static void printMainMenu() {
 		println("|Das ist ein tolles Menue|");
+		
 		println("|0:  insert number       |");
-
 		println("|1:  insert File         |");
 		println("|2:  contains number     |");
 		println("|3:  size                |");
@@ -137,12 +137,14 @@ public class BBaumMain {
 		println("|6:  smallest number     |");
 		println("|7:  is Empty            |");
 		println("|8:  addAll              |");
-
+		
+		
 		println("|10:  Print Inorder      |");
 		println("|11:  Print Postorder    |");
 		println("|12:  Print Preorder     |");
 		println("|13:  Print Levelorder   |");
-
+		
+		
 		println("|20: change wn to:       |");
 		println("|50: STOP                |");
 		print("???Watcha gonna do???: ");
