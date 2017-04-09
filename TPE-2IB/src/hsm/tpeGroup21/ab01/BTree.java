@@ -27,9 +27,9 @@ public class BTree implements BBaum {
 	}
 	
 	public boolean insert(Integer o) {
-		if(contains(o)){
-			return false;
-		}
+		//if(contains(o)){
+		//	return false;
+		//}
 		BBaumNode dummy = new BBaumNode(this.ordnung);
 		boolean temp = wurzel.insert(o,false,dummy);
 		if(dummy.getValues()[0] != null){
@@ -88,7 +88,20 @@ public class BTree implements BBaum {
 	 * @param otherTree inserts everything of other tree
 	 */
 	public void addAll(BTree otherTree) {
-		wurzel.addAll(otherTree.getWurzel());
+		addAll(otherTree.wurzel);
+		
+	}
+	
+	public void addAll(BBaumNode otherNode) {
+		for(int i = 0; i < otherNode.getPointer().length; i++){
+			if(otherNode.getPointer()[i]!=null){
+				addAll(otherNode.getPointer()[i]);
+			}
+			if(i < otherNode.getValues().length && otherNode.getValues()[i]!=null){
+				insert(otherNode.getValues()[i]);
+			}
+		}
+		
 	}
 
 	

@@ -195,7 +195,7 @@ public class BBaumNode {
 			}
 		}
 	}
-
+	
 	/**
 	 * 
 	 * @param value gets inserted
@@ -275,10 +275,6 @@ public class BBaumNode {
 			}
 		}
 		return null;
-	}
-	
-	public void addAll(BBaumNode insertNode) {
-		
 	}
 
 	public Integer getMin() {

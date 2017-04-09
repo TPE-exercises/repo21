@@ -5,9 +5,9 @@ public class BBaumMain {
 	public static void main(String[] args) {
 		BTree test = new BTree(10);
 		BTree test2 = new BTree(10);
-		test2.addAll(test);
 		//test.insert("rndmNmbrs.txt");
 		test.insert("rndmNmbrs.txt");
+		test2.addAll(test);
 		test.printInorder();
 		test2.printInorder();
 		test.printPostorder();
