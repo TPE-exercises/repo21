@@ -12,8 +12,9 @@ public class BBaumNode {
 	// Konstr
 	BBaumNode(int ordnung) {
 		maxValues = ordnung * 2;
+		//one more than necessary, to make burst "easy"
 		values = new Integer[maxValues + 1];
-		pointer = new BBaumNode[maxValues + 1];
+		pointer = new BBaumNode[maxValues + 2];
 	}
 
 	BBaumNode(int ordnung, BBaumNode parent) {
@@ -26,7 +27,11 @@ public class BBaumNode {
 		return values;
 	}
 	
-	public int getPointerNumber(int value){
+	/**
+	 * @param value to search in the pointer
+	 * @return position of pointer with the "value"
+	 */
+	private int getPointerNumber(int value){
 		for(int i = 0; i < maxValues +1; i++){
 			if(pointer[i].values[0]== value){
 				return i;
@@ -44,7 +49,7 @@ public class BBaumNode {
 	 *            to insert         
 	 */
 	public void addPointer(BBaumNode toInsert) {
-		for (int i = 0; i < maxValues + 1; i++) {
+		for (int i = 0; i < maxValues + 2; i++) {
 			if (pointer[i] == null) {
 				pointer[i] = toInsert;
 				sortPointer();
@@ -66,36 +71,70 @@ public class BBaumNode {
 	 * @param node dummy, if there is no parent, it becomes new root
 	 * @return null, if there was an parent before, else return node
 	 */
-	public BBaumNode burst(BBaumNode node) {
+	public BBaumNode burst(BBaumNode dummy) {
 		int mid = maxValues / 2;
 		if (parent != null) {
 			//if there is already a parent, the full node gets split
 			BBaumNode leftNode = new BBaumNode(maxValues / 2, parent);
 			BBaumNode rightNode = new BBaumNode(maxValues / 2, parent);
+			//add values to nodes
 			for (int i = 0; i < mid; i++) {
-				leftNode.insert(values[i],false, node);
+				leftNode.insert(values[i],false, dummy);
 			}
 			for (int i = mid + 1; i < maxValues+1; i++) {
-				rightNode.insert(values[i],false, node);
+				rightNode.insert(values[i],false, dummy);
 			}
-			parent.insert(values[mid],true, node);
+			//add pointer to new nodes
+			for(int i = 0; i< maxValues+2; i++){
+				if(pointer[i]== null){
+					i = maxValues+2;
+				}
+				else if(pointer[i].values[0]< values[mid]){
+					leftNode.addPointer(pointer[i]);
+					pointer[i].parent=leftNode;
+				}else{
+					rightNode.addPointer(pointer[i]);
+					pointer[i].parent=rightNode;
+				}
+			}
 			int placeForLeft = parent.getPointerNumber(values[0]);
+			//TODO:
+			if(placeForLeft < 0){
+				println("Fehler bei: "+ values[0]);
+			}
 			parent.pointer[placeForLeft] = leftNode;
 			parent.addPointer(rightNode);
+			parent.insert(values[mid],true, dummy);
+			
 		} else {
 			//if there is no parent, node becomes the new root
-			BBaumNode leftNode = new BBaumNode(maxValues / 2, node);
-			BBaumNode rightNode = new BBaumNode(maxValues / 2, node);
+			BBaumNode leftNode = new BBaumNode(maxValues / 2, dummy);
+			BBaumNode rightNode = new BBaumNode(maxValues / 2, dummy);
+			//add values to new nodes
 			for (int i = 0; i < mid; i++) {
-				leftNode.insert(values[i],false, node);
+				leftNode.insert(values[i],false, dummy);
 			}
 			for (int i = mid + 1; i < maxValues+1; i++) {
-				rightNode.insert(values[i], false, node);
+				rightNode.insert(values[i], false, dummy);
 			}
-			node.insert(values[mid],false, node);
-			node.pointer[0] = leftNode;
-			node.pointer[1] = rightNode;
-			return node;
+			//add pointer to new nodes
+			for(int i = 0; i< maxValues+2; i++){
+				if(pointer[i]== null){
+					i = maxValues+2;
+				}
+				else if(pointer[i].values[0]< values[mid]){
+					leftNode.addPointer(pointer[i]);
+					pointer[i].parent=leftNode;
+				}else{
+					rightNode.addPointer(pointer[i]);
+					pointer[i].parent=rightNode;
+				}
+			}
+			
+			dummy.insert(values[mid],false, dummy);
+			dummy.pointer[0] = leftNode;
+			dummy.pointer[1] = rightNode;
+			return dummy;
 		}
 		return null;
 	}
@@ -163,10 +202,7 @@ public class BBaumNode {
 		}
 		else{
 			for (int i = 0; i < maxValues + 1; i++) {
-				if(values[i]==null){
-					return pointer[i].insert(value,false,node);
-				}
-				if (values[i]>value){
+				if(values[i]==null || values[i]>value){
 					return pointer[i].insert(value,false,node);
 				}
 			}
@@ -294,5 +330,4 @@ public class BBaumNode {
 			}
 		}
 	}
-
 }
