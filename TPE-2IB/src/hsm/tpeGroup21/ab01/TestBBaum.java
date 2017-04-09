@@ -10,14 +10,17 @@ public class TestBBaum {
 	@Test
 	public final void test() {
 		assertEquals("Insert(rndmNmbrs.txt): ", true, testTree.insert("rndmNmbrs.txt"));
+		assertEquals("size()): ", 100, testTree.size());
+		assertEquals("size()): ", 0, emptyTree.size());
 		assertEquals("Insert(rndmNmbrs.txt): ", false, testTree.insert("rndmNmbrs.txt"));
-		assertEquals("Contains(2): ", true, testTree.contains(new Integer(2)));
-		assertEquals("Contains(2): ", false, testTree.contains(new Integer(900)));
-		assertEquals("Insert(2): ", true, testTree.insert(new Integer(555)));
+		assertEquals("Contains(30): ", true, testTree.contains(new Integer(30)));
+		assertEquals("Contains(900): ", false, testTree.contains(new Integer(900)));
+		assertEquals("Insert(555): ", true, testTree.insert(new Integer(555)));
 		assertEquals("Insert(2): ", false, testTree.insert(new Integer(2)));
-		assertEquals("size()): ", 31, testTree.size());
-		assertEquals("height(): ", 10, testTree.height());
-		assertEquals("getMax(): ", 555, testTree.getMax());
+		assertEquals("height(): ", 2, testTree.height());
+		assertEquals("height(): ", 0, emptyTree.height());
+	//	assertEquals("getMax(): ", 555, testTree.getMax());
+	//	assertEquals("getMin(): ", 555, testTree.getMin());	
 		assertEquals("isEmpty: ", true, emptyTree.isEmpty()) ;
 		assertEquals("isEmpty: ", false, testTree.isEmpty());
 				

@@ -27,11 +27,12 @@ public class BTree implements BBaum {
 	}
 	
 	public boolean insert(Integer o) {
-		//if(contains(o)){
-		//	return false;
-		//}
+		int k = o;
+		if(contains(k)){
+			return false;
+		}
 		BBaumNode dummy = new BBaumNode(this.ordnung);
-		boolean temp = wurzel.insert(o,false,dummy);
+		boolean temp = wurzel.insert(k,false,dummy);
 		if(dummy.getValues()[0] != null){
 			wurzel = dummy;
 		}
@@ -50,7 +51,8 @@ public class BTree implements BBaum {
 
 	
 	public boolean contains(Integer o) {
-		return wurzel.contains(o);
+		int k = o;
+		return wurzel.contains(k);
 	}
 
 	
@@ -60,7 +62,11 @@ public class BTree implements BBaum {
 
 	
 	public int height() {
-		return wurzel.height();
+		if(isEmpty()){
+			return 0;
+		}
+		else
+			return wurzel.height();
 	}
 
 	
