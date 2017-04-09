@@ -116,7 +116,6 @@ public class BBaumNode {
 				}
 			}
 			int placeForLeft = parent.getPointerNumber(values[0]);
-			//TODO:
 			if(placeForLeft < 0){
 				println("Fehler bei: "+ values[0]);
 			}

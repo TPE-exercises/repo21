@@ -26,11 +26,16 @@ public class BTree implements BBaum {
 		return wurzel;
 	}
 	
+	/**
+	 * @param o Integer to insert in BTree
+	 * @return True if it worked, false if doesnt
+	 */
 	public boolean insert(Integer o) {
 		int ins = o;
 		if(contains(ins)){
 			return false;
 		}
+		//dummy gets transfered, if there was o parent before, and burst() gets executed, dummy becomes new root
 		BBaumNode dummy = new BBaumNode(this.ordnung);
 		boolean temp = wurzel.insert(ins,false,dummy);
 		if(dummy.getValues()[0] != null){
@@ -39,6 +44,10 @@ public class BTree implements BBaum {
 		return temp;
 	}
 		
+	/**
+	 * @param filename File to get inserted
+	 * @return true if everythin was succesfull, else false
+	 */
 	public boolean insert(String filename) {
 		Object file = openInputFile(filename);
 		boolean temp = true;
@@ -49,18 +58,25 @@ public class BTree implements BBaum {
 		return temp;
 	}
 
-	
+	/**
+	 * @param o Integer to search
+	 * @return true, if o is in the Tree, else false
+	 */
 	public boolean contains(Integer o) {
 		int ins = o;
 		return wurzel.contains(ins);
 	}
 
-	
+	/**
+	 * @return amount of values in Tree
+	 */
 	public int size() {
 		return wurzel.getSize();
 	}
 
-	
+	/**
+	 * @return height of Tree
+	 */
 	public int height() {
 		if(isEmpty()){
 			return 0;
@@ -69,17 +85,23 @@ public class BTree implements BBaum {
 			return wurzel.height();
 	}
 
-	
+	/**
+	 * @return max Value of Tree
+	 */
 	public Integer getMax() {
 		return wurzel.getMax();
 	}
 
-	
+	/**
+	 * @return min Value of Tree
+	 */
 	public Integer getMin() {
 		return wurzel.getMin();
 	}
 
-	
+	/**
+	 * @return true, if Tree is empty, else false
+	 */
 	public boolean isEmpty() {
 		if(wurzel == null || wurzel.getValues()[0]==null){
 			return true;
@@ -97,7 +119,10 @@ public class BTree implements BBaum {
 		addAll(otherTree.wurzel);
 		
 	}
-	
+	/**
+	 * adds every value of otherTree to this
+	 * @param otherNode to get insert
+	 */
 	public void addAll(BBaumNode otherNode) {
 		for(int i = 0; i < otherNode.getPointer().length; i++){
 			if(otherNode.getPointer()[i]!=null){
@@ -110,28 +135,36 @@ public class BTree implements BBaum {
 		
 	}
 
-	
+	/**
+	 * prints Tree Inorder	
+	 */
 	public void printInorder() {
 		println("Inorder: ");
 		wurzel.printInorder();
 		println();
 	}
 
-	
+	/**
+	 * prints Tree Postorder	
+	 */
 	public void printPostorder() {
 		println("Postorder: ");
 		wurzel.printPostorder();
 		println();
 	}
 
-	
+	/**
+	 * prints Tree Preorder	
+	 */
 	public void printPreorder() {
 		println("Preorder: ");
 		wurzel.printPreorder();
 		println();	
 	}
 
-	
+	/**
+	 * prints Tree Levelorder	
+	 */
 	public void printLevelorder() {
 		println("Levelorder: ");
 		wurzel.printLevelorder();
