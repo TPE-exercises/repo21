@@ -83,10 +83,12 @@ public class BTree implements BBaum {
 		}
 	}
 
-	
+	/**
+	 * like printInorder, but instead of printing, it adds the values to this tree
+	 * @param otherTree inserts everything of other tree
+	 */
 	public void addAll(BTree otherTree) {
-		// TODO Auto-generated method stub
-		
+		wurzel.addAll(otherTree.getWurzel());
 	}
 
 	

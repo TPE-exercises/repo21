@@ -27,6 +27,10 @@ public class BBaumNode {
 		return values;
 	}
 	
+	public BBaumNode[] getPointer() {
+		return pointer;
+	}
+	
 	public int getSize(){
 		int sum = 0;
 		for(int i = 0; i < values.length; i++){
@@ -271,6 +275,10 @@ public class BBaumNode {
 			}
 		}
 		return null;
+	}
+	
+	public void addAll(BBaumNode insertNode) {
+		
 	}
 
 	public Integer getMin() {
