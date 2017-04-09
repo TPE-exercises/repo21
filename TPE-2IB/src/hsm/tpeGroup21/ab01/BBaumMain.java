@@ -7,13 +7,21 @@ public class BBaumMain {
 	public static void main(String[] args) {
 		BTree[] bt = new BTree[3];
 		int[] ordnung = new int[3];
-		println("Ordnung des ersten BBaum: ");
-		ordnung[0] = readInt();
-		println("Ordnung des zweiten BBaum: ");
-		ordnung[1] = readInt();
-		println("Ordnung des dritten BBaum: ");
-		ordnung[2] = readInt();
-
+		do{
+			println("Ordnung des ersten BBaum: ");
+			ordnung[0] = readInt();
+		}while(ordnung[0]< 1);
+		
+		do{
+			println("Ordnung des zweiten BBaum: ");
+			ordnung[1] = readInt();
+		}while(ordnung[1]< 1);
+		
+		do{
+			println("Ordnung des dritten BBaum: ");
+			ordnung[2] = readInt();
+		}while(ordnung[2]< 1);
+		
 		for (int i = 0; i < bt.length; i++) {
 			bt[i] = new BTree(ordnung[i]);
 		}
