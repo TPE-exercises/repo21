@@ -1,4 +1,4 @@
-package hsm.tpeGroup21.ab01;
+package de.hsMannheim.tpe.gruppe21.ab01;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -51,9 +51,6 @@ public class TestBBaum {
 			insertFailed = true;
 		}
 		assertEquals(true, insertFailed);
-		
-		
-		
 		
 	}
 	
