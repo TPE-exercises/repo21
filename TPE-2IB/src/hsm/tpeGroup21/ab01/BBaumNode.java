@@ -164,20 +164,14 @@ public class BBaumNode {
 	 */
 
 	public boolean contains(Integer o) {
-		// search all values and pointer
-		for (int i = 0; i < pointer.length; i++) {
-			if (values[i] == null) { // end of values, one pointer left
-				if (pointer[i] == null) {
-					return false;
-				} else
-					return pointer[i].contains(o);
-			} else if (values[i] == o) {
+		for(int i = 0; i < values.length; i++){
+			if(values[i]!= null && o == values[i]){
 				return true;
-			} else if (values[i] > o) {
-				if(pointer[i]==null){
-					return false;
-				}else
+			}
+			else if(i < values[i]||values[i] == null || i == values.length -1){
+				if(pointer[i]!= null){
 					return pointer[i].contains(o);
+				}
 			}
 		}
 		return false;
