@@ -3,13 +3,13 @@ package de.hsMannheim.tpe.gruppe21.ab01;
 import static gdi.MakeItSimple.*;
 
 public class BBaumNode {
-	// Attr
+	// Attribute
 	private int maxValues;
 	private Integer[] values;
 	private BBaumNode[] pointer;
 	private BBaumNode parent = null;
 
-	// Konstr
+	// Konstruktor
 	BBaumNode(int ordnung) {
 		maxValues = ordnung * 2;
 		// one more than necessary, to make burst "easy"
@@ -31,6 +31,11 @@ public class BBaumNode {
 		return pointer;
 	}
 
+	
+	/**
+	 * 
+	 * @return amount of values in nodes
+	 */
 	public int getSize() {
 		int sum = 0;
 		for (int i = 0; i < values.length; i++) {
@@ -78,6 +83,11 @@ public class BBaumNode {
 		}
 	}
 
+	
+	/**
+	 * 
+	 * @return true if one value too much in node
+	 */
 	private boolean isFull() {
 		if (values[maxValues] != null)
 			return true;
@@ -159,8 +169,7 @@ public class BBaumNode {
 	}
 
 	/**
-	 * @param to
-	 *            search Integer o
+	 * @param to search Integer o
 	 * @return true, if node or nodes under it contain o
 	 */
 
@@ -244,7 +253,10 @@ public class BBaumNode {
 		}
 
 	}
-
+	
+/**
+ * @return values of node as a String
+ */
 	public String toString() {
 		String ret = "(";
 		for (int i = 0; i < maxValues; i++) {
@@ -256,6 +268,10 @@ public class BBaumNode {
 		return ret;
 	}
 
+	/**
+	 * 
+	 * @return max Value 
+	 */
 	public Integer getMax() {
 		if (pointer[0] != null) {
 			for (int i = pointer.length - 1; i >= 0; i--) {
@@ -273,6 +289,10 @@ public class BBaumNode {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @return min Value
+	 */
 	public Integer getMin() {
 		if (pointer[0] != null) {
 			return pointer[0].getMin();
@@ -286,6 +306,9 @@ public class BBaumNode {
 		return null;
 	}
 
+	/**
+	 * @return level of node
+	 */
 	public int height() {
 		if (pointer[0] == null) {
 			return 1;
