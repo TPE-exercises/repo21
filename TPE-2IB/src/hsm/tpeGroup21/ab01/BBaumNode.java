@@ -168,7 +168,7 @@ public class BBaumNode {
 			if(values[i]!= null && o == values[i]){
 				return true;
 			}
-			else if(values[i] == null || i < values[i] || i == values.length -1){
+			else if(values[i] == null || o < values[i] || i == values.length -1){
 				if(pointer[i]!= null){
 					return pointer[i].contains(o);
 				}

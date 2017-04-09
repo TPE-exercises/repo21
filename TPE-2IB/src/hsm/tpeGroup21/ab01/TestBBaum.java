@@ -13,7 +13,7 @@ public class TestBBaum {
 		assertEquals("size()): ", 100, testTree.size());
 		assertEquals("size()): ", 0, emptyTree.size());
 		assertEquals("Insert(rndmNmbrs.txt): ", false, testTree.insert("rndmNmbrs.txt"));
-		assertEquals("Contains(30): ", true, testTree.contains(new Integer(30)));
+		assertEquals("Contains(2): ", true, testTree.contains(new Integer(2)));
 		assertEquals("Contains(900): ", false, testTree.contains(new Integer(900)));
 		assertEquals("Insert(555): ", true, testTree.insert(new Integer(555)));
 		assertEquals("Insert(2): ", false, testTree.insert(new Integer(2)));
