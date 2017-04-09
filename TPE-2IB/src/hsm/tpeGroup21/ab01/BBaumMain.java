@@ -84,7 +84,7 @@ public class BBaumMain {
 					inp = readInt();
 				}
 				while(inp<0 || inp>=3);
-				bt[wn] = bt[wn].addAll(bt[inp]);
+				bt[wn].addAll(bt[inp]);
 				println("Success");
 				break; //addAll
 
@@ -118,25 +118,25 @@ public class BBaumMain {
 	}
 
 	public static void printMainMenu() {
-		println("|Das ist ein tolles Menü|");
-		println("|0:  insert number      |");
+		println("|Das ist ein tolles Menue|");
+		println("|0:  insert number       |");
 
-		println("|1:  insert File        |");
-		println("|2:  contains number    |");
-		println("|3:  size               |");
-		println("|4:  height             |");
-		println("|5:  biggest number     |");
-		println("|6:  smallest number    |");
-		println("|7:  is Empty           |");
-		println("|8:  addAll             |"); // TODO
+		println("|1:  insert File         |");
+		println("|2:  contains number     |");
+		println("|3:  size                |");
+		println("|4:  height              |");
+		println("|5:  biggest number      |");
+		println("|6:  smallest number     |");
+		println("|7:  is Empty            |");
+		println("|8:  addAll              |");
 
-		println("|10:  Print Inorder     |");
-		println("|11:  Print Postorder   |");
-		println("|12:  Print Preorder    |");
-		println("|13:  Print Levelorder  |");
+		println("|10:  Print Inorder      |");
+		println("|11:  Print Postorder    |");
+		println("|12:  Print Preorder     |");
+		println("|13:  Print Levelorder   |");
 
-		println("|20: change wn to:      |");
-		println("|50: STOP               |");
+		println("|20: change wn to:       |");
+		println("|50: STOP                |");
 		print("???Watcha gonna do???: ");
 	}
 
