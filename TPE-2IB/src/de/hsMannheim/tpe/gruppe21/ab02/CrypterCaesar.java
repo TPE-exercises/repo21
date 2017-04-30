@@ -10,7 +10,7 @@ public class CrypterCaesar implements Crypter{
 	
 	@Override
 	public String encrypt(String message) {
-		int key = 5;
+		int key = 1;
 		String newMessage = "";
 		for(int i = 0; i< message.length(); i++){
 			
@@ -47,8 +47,35 @@ public class CrypterCaesar implements Crypter{
 	
 	@Override
 	public String decrypt(String cypherText) {
-		// TODO Auto-generated method stub
-		return null;
+		int key = 1;
+		String newMessage = "";
+		for(int i = 0; i< cypherText.length(); i++){
+			
+			if(!isLetter(cypherText.charAt(i))){
+				//TODO: Throw new exception
+			}
+			
+			//Upper case
+			if(cypherText.charAt(i) < KLEINA){
+				if(cypherText.charAt(i)+ key > GROSSZ){
+					newMessage += (char)(cypherText.charAt(i)+key - 26);
+				}
+				else{
+					newMessage += (char)(cypherText.charAt(i)+key);
+				}
+			}
+			//Lower case
+			else{
+				if(cypherText.charAt(i)+ key > KLEINZ){
+					newMessage += (char)(cypherText.charAt(i)+key - 26);
+				}
+				else{
+					newMessage += (char)(cypherText.charAt(i)+key);
+				}
+			}
+		}
+		
+		return newMessage;
 	}
 
 }

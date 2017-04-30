@@ -12,5 +12,16 @@ public class CrypterMain {
 		println(message);
 		
 		
+		CrypterCaesar caesar = new CrypterCaesar();
+
+		String message2 = caesar.encrypt("XYZ");
+
+		println(message2);
+
+		String message3 = caesar.decrypt(message2);
+
+		println(message3);
+		
+		
 	}
 }
