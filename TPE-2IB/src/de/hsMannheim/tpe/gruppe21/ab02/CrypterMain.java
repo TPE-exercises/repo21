@@ -1,4 +1,4 @@
-package de.hsMannheim.tpe.gruppe21.ab022;
+package de.hsMannheim.tpe.gruppe21.ab02;
 
 import static gdi.MakeItSimple.*;
 
