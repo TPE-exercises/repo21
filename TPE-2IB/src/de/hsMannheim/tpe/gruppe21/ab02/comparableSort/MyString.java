@@ -7,8 +7,14 @@ public class MyString implements Comparable{
 		this.value = value;
 	}
 	
-	public int compareTo(MyString other){
-		return -1;
+	public String getValue(){
+		return value;
 	}
+	
+	public int compareTo(Object other){
+		return value.compareTo((String) other.toString());
+	}
+
+
 	
 }
