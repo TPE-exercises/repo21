@@ -2,21 +2,21 @@ package de.hsMannheim.tpe.gruppe21.ab02;
 
 public class Eisdiele {
 
-	public void bestellen(String typ){
-		begruessen();
-		
-		if(eisZubereiten(typ)){
-			kassieren();
-		}else{
-			entschuldigen();
-		}
-		
-		verabschieden();
-	};
+	/**
+	 * First he says hello. Orders ice cream of the type "typ". If its not available
+	 * he apologizes. At the end, he says googbye.
+	 * @param typ
+	 */
+	public void bestellen(String typ){}
 	
-	protected boolean eisZubereiten(String typ){return false;}
+	/**
+	 * 
+	 */
 	protected void begruessen(){}
+	
 	protected void kassieren(){}
+	
 	protected void verabschieden(){}
+	
 	protected void entschuldigen(){}
 }

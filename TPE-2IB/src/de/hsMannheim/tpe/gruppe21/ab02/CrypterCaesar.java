@@ -2,19 +2,24 @@ package de.hsMannheim.tpe.gruppe21.ab02;
 
 public class CrypterCaesar implements Crypter{
 	
-	private final int GROSSZUKLEIN = 32;
 	private final int GROSSA = 65;
 	private final int GROSSZ = 90;
 	private final int KLEINA = 97;
 	private final int KLEINZ = 122;	
+	private int key = 5;
 	
 	@Override
+	/**
+	 * encrypts a String with the key by ceasar encryption
+	 * @param: message String to encrypt
+	 * @return: String the encypted message 
+	 */
 	public String encrypt(String message) {
-		int key = 1;
 		String newMessage = "";
 		for(int i = 0; i< message.length(); i++){
 			
 			if(!isLetter(message.charAt(i))){
+				return null;
 				//TODO: Throw new exception
 			}
 			
@@ -46,31 +51,36 @@ public class CrypterCaesar implements Crypter{
 	}
 	
 	@Override
+	/**
+	 * decrypts a String with the key by ceasar encryption
+	 * @param: cypherText String to decrypt
+	 * @return: String the decrypted message 
+	 */
 	public String decrypt(String cypherText) {
-		int key = 1;
 		String newMessage = "";
 		for(int i = 0; i< cypherText.length(); i++){
 			
 			if(!isLetter(cypherText.charAt(i))){
+				return null;
 				//TODO: Throw new exception
 			}
 			
 			//Upper case
 			if(cypherText.charAt(i) < KLEINA){
-				if(cypherText.charAt(i)+ key > GROSSZ){
-					newMessage += (char)(cypherText.charAt(i)+key - 26);
+				if(cypherText.charAt(i)- key < GROSSA){
+					newMessage += (char)(cypherText.charAt(i)-key + 26);
 				}
 				else{
-					newMessage += (char)(cypherText.charAt(i)+key);
+					newMessage += (char)(cypherText.charAt(i)-key);
 				}
 			}
 			//Lower case
 			else{
-				if(cypherText.charAt(i)+ key > KLEINZ){
-					newMessage += (char)(cypherText.charAt(i)+key - 26);
+				if(cypherText.charAt(i)- key < KLEINA){
+					newMessage += (char)(cypherText.charAt(i)-key + 26);
 				}
 				else{
-					newMessage += (char)(cypherText.charAt(i)+key);
+					newMessage += (char)(cypherText.charAt(i)-key);
 				}
 			}
 		}
