@@ -26,5 +26,13 @@ public class CompSortMain {
 		return myIntArray;
 	}
 	
+	public static MyString[] toMyString(String[] stringArray){
+		MyString[] myStringArray = new MyString[stringArray.length];
+		for(int i = 0; i < stringArray.length; i++){
+			myStringArray[i] = new MyString(stringArray[i]);
+		}
+		return myStringArray;
+	}
+	
 	
 }
