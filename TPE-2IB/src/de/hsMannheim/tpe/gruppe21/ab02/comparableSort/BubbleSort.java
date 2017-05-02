@@ -3,7 +3,7 @@ package de.hsMannheim.tpe.gruppe21.ab02.comparableSort;
 
 public class BubbleSort {
 
-	public static void bubbleSort(Comparable[] compareArray) {
+	public static Comparable[] bubbleSort(Comparable[] compareArray) {
 		while (!isSorted(compareArray)) {
 				for (int i = 0; i < compareArray.length - 1; i++) {
 					if (compareArray[i].compareTo(compareArray[i - 1]) == -1) {
@@ -11,7 +11,8 @@ public class BubbleSort {
 					}
 				}
 			}
-		}
+		return compareArray;
+	}
 
 	
 

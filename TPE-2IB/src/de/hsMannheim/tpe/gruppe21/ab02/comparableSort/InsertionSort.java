@@ -2,7 +2,7 @@ package de.hsMannheim.tpe.gruppe21.ab02.comparableSort;
 
 public class InsertionSort {
 	
-	public static void insertionSort(Comparable[] compareArray){
+	public static Comparable[] insertionSort(Comparable[] compareArray){
 		for(int i = 1; i < compareArray.length; i++){
 			for(int j = i; j > 1; j++){
 				if(compareArray[j].compareTo(compareArray[j-1]) == -1){
@@ -10,6 +10,7 @@ public class InsertionSort {
 				}
 			}
 		}
+		return compareArray;
 	}
 	
 	private static void swap(Comparable[] compareArray, int objectOne, int objectTwo){
