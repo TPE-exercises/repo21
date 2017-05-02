@@ -17,4 +17,14 @@ public class CompSortMain {
 			return InsertionSort.insertionSort(sortArray);
 		}		
 	}
+	
+	public static MyInt[] toMyInt(int[] intArray){
+		MyInt[] myIntArray = new MyInt[intArray.length];
+		for(int i = 0; i < intArray.length; i++){
+			myIntArray[i] = new MyInt(intArray[i]);
+		}
+		return myIntArray;
+	}
+	
+	
 }
