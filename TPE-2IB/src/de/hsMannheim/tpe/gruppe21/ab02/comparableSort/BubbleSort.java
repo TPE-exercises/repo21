@@ -1,4 +1,4 @@
-package de.hsMannheim.tpe.gruppe21.ab02;
+package de.hsMannheim.tpe.gruppe21.ab02.comparableSort;
 
 
 public class BubbleSort {
