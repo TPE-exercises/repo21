@@ -5,7 +5,6 @@ public class BubbleSort {
 
 	public static void bubbleSort(Comparable[] compareArray) {
 		while (!isSorted(compareArray)) {
-			if (!isSorted(compareArray)) {
 				for (int i = 0; i < compareArray.length - 1; i++) {
 					if (compareArray[i].compareTo(compareArray[i - 1]) == -1) {
 						swap(compareArray, i, i + 1);
@@ -14,7 +13,7 @@ public class BubbleSort {
 			}
 		}
 
-	}
+	
 
 	private static void swap(Comparable[] compareArray, int objectOne, int objectTwo) {
 		Comparable swapper = compareArray[objectOne];
