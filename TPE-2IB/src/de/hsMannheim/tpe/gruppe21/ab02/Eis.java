@@ -9,7 +9,13 @@ public class Eis {
 	private String[] sorten;
 	private String[] extras;
 	
-	protected void vorbereiten(){};
-	protected void fuellen(){};
-	protected void dekorieren(){};
+	protected void vorbereiten(){
+		
+	};
+	protected void fuellen(){
+		
+	};
+	protected void dekorieren(){
+		
+	};
 }
