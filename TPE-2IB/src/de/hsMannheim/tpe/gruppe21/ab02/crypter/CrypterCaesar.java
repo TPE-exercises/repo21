@@ -1,5 +1,5 @@
 package de.hsMannheim.tpe.gruppe21.ab02.crypter;
-
+import static gdi.MakeItSimple.*;
 public class CrypterCaesar implements Crypter{
 	
 	private final int GROSSA = 65;
@@ -19,8 +19,8 @@ public class CrypterCaesar implements Crypter{
 		for(int i = 0; i< message.length(); i++){
 			
 			if(!isLetter(message.charAt(i))){
-				return null;
-				//TODO: Throw new exception
+				throw new GDIException("Only letters please...");
+				
 			}
 			
 			//Upper case
@@ -61,8 +61,7 @@ public class CrypterCaesar implements Crypter{
 		for(int i = 0; i< cypherText.length(); i++){
 			
 			if(!isLetter(cypherText.charAt(i))){
-				return null;
-				//TODO: Throw new exception
+				throw new GDIException("Only letters please...");
 			}
 			
 			//Upper case

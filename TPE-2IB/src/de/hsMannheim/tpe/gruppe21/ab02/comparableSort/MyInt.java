@@ -4,6 +4,7 @@ public class MyInt implements Comparable {
 	
 	private int value;
 	
+	
 	public MyInt(int value){
 		this.value = value;
 	}
