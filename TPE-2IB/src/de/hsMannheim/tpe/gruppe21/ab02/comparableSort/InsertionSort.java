@@ -10,9 +10,9 @@ public class InsertionSort {
 	 */
 	public static Comparable[] insertionSort(Comparable[] compareArray){
 		for(int i = 1; i < compareArray.length; i++){
-			for(int j = i; j > 1; j++){
+			for(int j = i; j > 0; j--){
 				if(compareArray[j].compareTo(compareArray[j-1]) == -1){
-					swap(compareArray, j, j+1);
+					swap(compareArray, j, j-1);
 				}
 			}
 		}

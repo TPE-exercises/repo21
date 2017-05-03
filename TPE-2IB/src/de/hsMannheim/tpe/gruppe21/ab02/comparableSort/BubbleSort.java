@@ -1,5 +1,7 @@
 package de.hsMannheim.tpe.gruppe21.ab02.comparableSort;
 
+import static gdi.MakeItSimple.*;
+
 public class BubbleSort {
 
 	
@@ -12,9 +14,9 @@ public class BubbleSort {
 	 */
 	public static Comparable[] bubbleSort(Comparable[] compareArray) {
 		while (!isSorted(compareArray)) {
-			for (int i = 0; i < compareArray.length - 1; i++) {
-				if (compareArray[i].compareTo(compareArray[i - 1]) == -1) {
-					swap(compareArray, i, i + 1);
+			for (int i = 1; i < compareArray.length; i++) {
+				if (compareArray[i].compareTo(compareArray[i - 1]) > 0) {
+					swap(compareArray, i, i - 1);
 				}
 			}
 		}
@@ -33,7 +35,7 @@ public class BubbleSort {
 	 *            second object to swap
 	 * @return comapreArray with swapped objects
 	 */
-	private static void swap(Comparable[] compareArray, int objectOne, int objectTwo) {
+	private static void swap(Comparable[] compareArray, int objectOne, int objectTwo) {	
 		Comparable swapper = compareArray[objectOne];
 		compareArray[objectOne] = compareArray[objectTwo];
 		compareArray[objectTwo] = swapper;
@@ -45,8 +47,8 @@ public class BubbleSort {
 	 * @return true if Array is sorted, false if not
 	 */
 	private static boolean isSorted(Comparable[] compareArray) {
-		for (int i = 0; i < compareArray.length; i++) {
-			if (compareArray[i].compareTo(compareArray[i - 1]) == -1) {
+		for (int i = 1; i < compareArray.length; i++) {
+			if (compareArray[i].compareTo(compareArray[i - 1]) > 0) {
 				return false;
 			}
 		}
