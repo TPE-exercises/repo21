@@ -1,5 +1,7 @@
 package de.hsMannheim.tpe.gruppe21.ab02.comparableSort;
 
+import static gdi.MakeItSimple.*;
+
 public class CompSortMain {
 
 	public static final boolean BUBBLESORT = true;
@@ -7,6 +9,21 @@ public class CompSortMain {
 	
 	public static void main(String[] args) {
 		
+		
+		
+	}
+	
+	
+	public static void printMyIntArray(MyInt[] toPrint){
+		for(int i = 0; i < toPrint.length; i++){
+			println(toPrint[i].getValue() + ", ");
+		}
+	}
+	
+	public static void printMyStringArray(MyString[] toPrint){
+		for(int i = 0; i < toPrint.length; i++){
+			println(toPrint[i].getValue() + ", ");
+		}
 	}
 
 	public static Comparable[] sortArray(boolean sortType, Comparable[] sortArray){

@@ -1,18 +1,18 @@
 package de.hsMannheim.tpe.gruppe21.ab02.comparableSort;
 
 public class MyString implements Comparable{
-	private String string;
+	private String value;
 	
 	public MyString(String value){
-		this.string = string;
+		this.value = value;
 	}
 	
 	public String getValue(){
-		return string;
+		return value;
 	}
 	
 	public int compareTo(Object other){
-		return string.compareTo((String) other.toString());
+		return value.compareTo((String) other.toString());
 	}
 
 
