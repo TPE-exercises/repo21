@@ -17,7 +17,7 @@ public interface Stack {
 	 * Removes element on top of stack
 	 * @return removed element
 	 */
-	public Object pop();
+	public Object pop() throws UnderflowException;
 	
 	
 	/**
@@ -25,13 +25,6 @@ public interface Stack {
 	 * @return element on top of the stack
 	 */
 	public Object top();
-	
-	
-	/**
-	 * Creates an empty stack
-	 * @return empty stack
-	 */
-	public Stack empty();
 	
 	
 	/**
