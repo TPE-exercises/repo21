@@ -8,8 +8,9 @@ public interface Stack {
 	 * 
 	 * @param element to put on stack
 	 * @return Stack with element
+	 * @throws OverflowException 
 	 */
-	public Stack push(Object element);
+	public Stack push(Object element) throws OverflowException;
 	
 	
 	/**
