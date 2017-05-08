@@ -1,11 +1,11 @@
-package myutil;
+package de.hsMannheim.tpe.gruppe21.ab03.myutil;
 
 public interface Queue {
 	/**
 	 * @param element to enter
 	 * @return Queue with element
 	 */
-	public Queue enter(int element);
+	public Queue enter(Object element);
 	
 	/**
 	 * work on first element
@@ -16,7 +16,7 @@ public interface Queue {
 	/**
 	 * @return first element
 	 */
-	public int front();
+	public Object front();
 	
 	/**
 	 * creates empty Queue

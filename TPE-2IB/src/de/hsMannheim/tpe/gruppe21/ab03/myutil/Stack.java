@@ -1,4 +1,4 @@
-package myutil;
+package de.hsMannheim.tpe.gruppe21.ab03.myutil;
 
 public interface Stack {
 
@@ -9,21 +9,21 @@ public interface Stack {
 	 * @param element to put on stack
 	 * @return Stack with element
 	 */
-	public Stack push(int element);
+	public Stack push(Object element);
 	
 	
 	/**
 	 * Removes element on top of stack
 	 * @return removed element
 	 */
-	public int pop();
+	public Object pop();
 	
 	
 	/**
 	 * Get element on top of stack
 	 * @return element on top of the stack
 	 */
-	public int top();
+	public Object top();
 	
 	
 	/**

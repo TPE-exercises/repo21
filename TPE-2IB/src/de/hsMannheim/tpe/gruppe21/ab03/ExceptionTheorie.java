@@ -1,4 +1,4 @@
-package myutil;
+package de.hsMannheim.tpe.gruppe21.ab03;
 
 public class ExceptionTheorie {
 
