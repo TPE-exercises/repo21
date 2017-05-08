@@ -50,27 +50,34 @@ public class StackArray implements Stack{
 	
 
 	@Override
-	public Object pop() {
+	public Object pop() throws UnderflowException{
 		try{
 			if(values[0]== null){
 				throw new UnderflowException("");
 			}
+			else{
+				for(int i = 0; i < values.length; i++){
+					if(values[i] == null){
+						Object ret = values[i-1];
+						values[i-1] = null;
+						return ret;
+					}
+				}
+			}
 		}catch(UnderflowException uexc){
-			
+			throw uexc;
 		}
-		
+		return null;
 	}
 
 	@Override
 	public Object top() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Stack empty() {
-		// TODO Auto-generated method stub
-		return null;
+		for(int i = 1; i < values.length; i++){
+			if(values[i] == null){
+				return values[i-1];
+			}
+		}
+		return values[values.length];
 	}
 
 	@Override
