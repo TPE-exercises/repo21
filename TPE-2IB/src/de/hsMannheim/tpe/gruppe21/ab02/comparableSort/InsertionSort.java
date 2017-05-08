@@ -1,6 +1,6 @@
 package de.hsMannheim.tpe.gruppe21.ab02.comparableSort;
 
-public class InsertionSort {
+public class InsertionSort implements Sort{
 	
 	
 	/**
@@ -8,7 +8,7 @@ public class InsertionSort {
 	 * @param compareArray Array to sort
 	 * @return sorted Array
 	 */
-	public static Comparable[] insertionSort(Comparable[] compareArray){
+	public Comparable[] sort(Comparable[] compareArray){
 		for(int i = 1; i < compareArray.length; i++){
 			for(int j = i; j > 0; j--){
 				if(compareArray[j].compareTo(compareArray[j-1]) == -1){

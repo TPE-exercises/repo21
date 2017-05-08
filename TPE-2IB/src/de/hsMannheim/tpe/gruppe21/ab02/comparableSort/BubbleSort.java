@@ -2,7 +2,7 @@ package de.hsMannheim.tpe.gruppe21.ab02.comparableSort;
 
 import static gdi.MakeItSimple.*;
 
-public class BubbleSort {
+public class BubbleSort implements Sort{
 
 	
 	
@@ -12,7 +12,7 @@ public class BubbleSort {
 	 * @param compareArray Array to sort
 	 * @return sorted Array
 	 */
-	public static Comparable[] bubbleSort(Comparable[] compareArray) {
+	public Comparable[] sort(Comparable[] compareArray) {
 		while (!isSorted(compareArray)) {
 			for (int i = 1; i < compareArray.length; i++) {
 				if (compareArray[i].compareTo(compareArray[i - 1]) > 0) {
@@ -35,7 +35,7 @@ public class BubbleSort {
 	 *            second object to swap
 	 * @return comapreArray with swapped objects
 	 */
-	private static void swap(Comparable[] compareArray, int objectOne, int objectTwo) {	
+	private void swap(Comparable[] compareArray, int objectOne, int objectTwo) {	
 		Comparable swapper = compareArray[objectOne];
 		compareArray[objectOne] = compareArray[objectTwo];
 		compareArray[objectTwo] = swapper;
@@ -46,7 +46,7 @@ public class BubbleSort {
 	 *            Array to check if sorting is correct
 	 * @return true if Array is sorted, false if not
 	 */
-	private static boolean isSorted(Comparable[] compareArray) {
+	private boolean isSorted(Comparable[] compareArray) {
 		for (int i = 1; i < compareArray.length; i++) {
 			if (compareArray[i].compareTo(compareArray[i - 1]) > 0) {
 				return false;
