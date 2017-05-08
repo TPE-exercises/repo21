@@ -1,4 +1,4 @@
-package de.hsMannheim.tpe.gruppe21.ab03;
+package de.hsMannheim.tpe.gruppe21.ab03.myutil;
 
 public class OverflowException extends Exception{
 
