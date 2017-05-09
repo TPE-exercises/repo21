@@ -13,7 +13,7 @@ import org.junit.Test;
  * @author sebas
  *
  */
-public class TestJUnit {
+public class TestJUnitExc {
 
 	/**
 	 * @throws java.lang.Exception
