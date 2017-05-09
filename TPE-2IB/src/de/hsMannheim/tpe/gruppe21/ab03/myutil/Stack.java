@@ -5,7 +5,7 @@ public interface Stack {
 	
 	
 	/**
-	 * 
+	 * if stack is full for the first time, size gets doubled, else overflow exception
 	 * @param element to put on stack
 	 * @return Stack with element
 	 * @throws OverflowException 

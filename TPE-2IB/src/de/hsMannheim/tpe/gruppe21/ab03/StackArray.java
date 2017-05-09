@@ -29,6 +29,7 @@ public class StackArray implements Stack{
 		}catch(OverflowException oexc){
 			if(exceptionFlag == 0){
 				doublesSize();
+				this.exceptionFlag++;
 			}
 			else{
 				throw oexc;
@@ -44,28 +45,23 @@ public class StackArray implements Stack{
 			doubled[i] = values[i];
 		}
 		this.values = doubled;
-		this.exceptionFlag++;
 		return this.values;
 	}
 	
 
 	@Override
 	public Object pop() throws UnderflowException{
-		try{
-			if(values[0]== null){
-				throw new UnderflowException("");
-			}
-			else{
-				for(int i = 0; i < values.length; i++){
-					if(values[i] == null){
-						Object ret = values[i-1];
-						values[i-1] = null;
-						return ret;
-					}
+		if(this.isEmpty()){
+			throw new UnderflowException("");
+		}
+		else{
+			for(int i = 0; i < values.length; i++){
+				if(values[i] == null){
+					Object ret = values[i-1];
+					values[i-1] = null;
+					return ret;
 				}
 			}
-		}catch(UnderflowException uexc){
-			throw uexc;
 		}
 		return null;
 	}
@@ -82,14 +78,22 @@ public class StackArray implements Stack{
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		if(values[0]==null){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		for(int i = 0; i < values.length; i++){
+			if(values[i]==null){
+				return i;
+			}
+		}
+		return values.length;
 	}
 
 }
