@@ -33,10 +33,9 @@ public class CaesarReader extends FilterReader {
 		int position = caesarAlph.length;
 		for(int i = 0; i < caesarAlph.length; i++){
 			if(caesarAlph[i] == toDecrypt){
-				position = i;
+				position = i - key;
 			}
 		}
-		position -= key;
 		//if there is an underflow
 		while(position < 0){
 			position += caesarAlph.length;

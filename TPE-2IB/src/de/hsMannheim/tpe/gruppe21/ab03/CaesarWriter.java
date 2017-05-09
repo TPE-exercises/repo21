@@ -37,7 +37,7 @@ public class CaesarWriter extends FilterWriter {
 		for(int i = 0; i < copyStrC.length ; i++){
 			copyStrC[i] = caesarCrypt(copyStrC[i]);
 		}
-		String copyStrS = copyStrC.toString();
+		String copyStrS = new String(copyStrC);
 		super.write(copyStrS, off, len);
 	}
 	
@@ -53,10 +53,9 @@ public class CaesarWriter extends FilterWriter {
 		int position = -1;
 		for(int i = 0; i < caesarAlph.length; i++){
 			if(caesarAlph[i] == toCrypt){
-				position = i;
+				position = i + key;
 			}
 		}
-		position += key;
 		//if there is an overflow
 		while(position > caesarAlph.length-1){
 			position -= caesarAlph.length;
