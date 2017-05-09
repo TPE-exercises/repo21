@@ -2,27 +2,24 @@ package de.hsMannheim.tpe.gruppe21.ab03.myutil;
 
 public interface Queue {
 	/**
+	 * if queue is full for the first time, size gets doubled, else overflow exception
 	 * @param element to enter
 	 * @return Queue with element
+	 *  @throws OverflowException 
 	 */
-	public Queue enter(Object element);
+	public Queue enter(Object element) throws OverflowException;;
 	
 	/**
-	 * work on first element
-	 * @return Queue without first element
-	 */
-	public Queue leave();
-	
-	/**
+	 * Removes first element of queue
 	 * @return first element
 	 */
-	public Object front();
+	public Object leave() throws UnderflowException;
 	
 	/**
-	 * creates empty Queue
-	 * @return empty Queue
+	 * @return first element of Queue
 	 */
-	public Queue emptyList();
+	public Object front() throws UnderflowException;
+	
 	
 	/**
 	 * @return true, if Queue is empty
@@ -30,10 +27,6 @@ public interface Queue {
 	 */
 	public boolean isEmpty();
 	
-	/**
-	 * @return Queue as String
-	 */
-	public String toString();
 	
 	/**
 	 * 

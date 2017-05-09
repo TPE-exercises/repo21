@@ -40,7 +40,7 @@ public class StackArray implements Stack{
 	}
 	
 	private Object[] doublesSize(){
-		Object[] doubled = new Object[this.values.length];
+		Object[] doubled = new Object[this.values.length * 2];
 		for(int i = 0; i < this.values.length; i++){
 			doubled[i] = values[i];
 		}
@@ -55,15 +55,17 @@ public class StackArray implements Stack{
 			throw new UnderflowException("");
 		}
 		else{
-			for(int i = 0; i < values.length; i++){
+			Object ret = values[values.length-1];
+			for(int i = 1; i < values.length; i++){
 				if(values[i] == null){
-					Object ret = values[i-1];
+					ret = values[i-1];
 					values[i-1] = null;
 					return ret;
 				}
 			}
+			values[values.length-1] = null;
+			return ret;
 		}
-		return null;
 	}
 
 	@Override

@@ -19,8 +19,8 @@ public class CompSortMain {
 		Sort bubSorter = new BubbleSort();
 		Sort inSorter = new InsertionSort();
 		
-		sortArray(testerTest2, bubSorter);
-		sortArray(testerTest3, inSorter);
+		//sortArray(testerTest2, bubSorter);
+		//sortArray(testerTest3, inSorter);
 		
 		printMyIntArray(testerTest2);
 		printMyIntArray(testerTest3);
