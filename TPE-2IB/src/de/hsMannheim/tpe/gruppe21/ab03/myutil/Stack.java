@@ -16,6 +16,7 @@ public interface Stack {
 	/**
 	 * Removes element on top of stack
 	 * @return removed element
+	 * @throws UnderflowException
 	 */
 	public Object pop() throws UnderflowException;
 	
