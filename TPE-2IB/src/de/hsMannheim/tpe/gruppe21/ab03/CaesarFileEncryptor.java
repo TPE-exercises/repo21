@@ -4,32 +4,53 @@ import java.io.File;
 
 public class CaesarFileEncryptor implements IFileEncrypter {
 	
+	
+	private int key;
+	
+	public CaesarFileEncryptor(int key){
+		this.key = key;
+	}
+	
 	@Override
 	public File encrypt(File sourceDirectory) {
-		if(!sourceDirectory.isFile()){
-			File[] inFile = sourceDirectory.listFiles();
-			for(int i = 0; i < inFile.length; i++){
-				encrypt(inFile[i]);
-			}
-		}
-		else{
-			//TODO: encrypt
-		}
-		return null;
+		String encryptedFilePath = createFilePath(sourceDirectory, true);
+		return encryptRecursively(sourceDirectory, encryptedFilePath);
+	}
+	
+	public File encryptRecursively(File sourceDirectory, String filePath){
+		
 	}
 
 	@Override
 	public File decrypt(File sourceDirectory) {
-		if(!sourceDirectory.isFile()){
-			File[] inFile = sourceDirectory.listFiles();
-			for(int i = 0; i < inFile.length; i++){
-				encrypt(inFile[i]);
-			}
+		String decryptedFilePath = createFilePath(sourceDirectory, false);
+		return decryptRecursively(sourceDirectory, decryptedFilePath);
+	}
+	
+	public File decryptRecursively(File sourceDirectory, String filePath){
+		
+	}
+	
+	
+	private String createFilePath(File sourceDirectory, boolean encrypt){
+		String endr = sourceDirectory.getPath();
+		if(encrypt){
+			endr += "_encrypted";
 		}
 		else{
-			//TODO: decrypt
+			endr += "_decrypted";
 		}
-		return null;
+		int counter = 0;
+		if(new File(endr).exists()){
+			endr += "0";
+		}
+		while(new File(endr).exists()){
+			counter++;
+			char[] endrChar = endr.toCharArray();
+			endrChar[endrChar.length-1] = (char) counter;
+			endr = new String(endrChar);
+		}
+		return endr;
 	}
 
 }

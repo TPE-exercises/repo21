@@ -18,6 +18,8 @@ public class CaesarMainTest {
 		
 		String endresult = new String(cbuf);
 		System.out.println(endresult);
+		
+		
 	}
 
 }
