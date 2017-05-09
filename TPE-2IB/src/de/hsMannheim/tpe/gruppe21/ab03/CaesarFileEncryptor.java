@@ -27,7 +27,7 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 			}
 		}
 		else{
-			//TODO: encrypt
+			//TODO: decrypt
 		}
 		return null;
 	}
