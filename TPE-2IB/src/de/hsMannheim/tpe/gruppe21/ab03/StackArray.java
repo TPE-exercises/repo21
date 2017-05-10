@@ -22,25 +22,27 @@ public class StackArray implements Stack, ADT{
 						break;
 					}
 				}
+				return true;
 			}
 			else{
-				throw new OverflowException("Letztes Object im Array war nicht null" , element );
+				throw new OverflowException("Queue is full there is no place for: " , element );
 			}
 		}catch(OverflowException oexc){
 			if(exceptionFlag == 0){
 				doublesSize();
 				this.exceptionFlag++;
+				return false;
 			}
 			else{
 				throw oexc;
 			}
 		}
 		
-		return true;
+		
 	}
 	
 	private Object[] doublesSize(){
-		Object[] doubled = new Object[this.values.length * 2];
+		Object[] doubled = new Object[(this.values.length * 2)];
 		for(int i = 0; i < this.values.length; i++){
 			doubled[i] = values[i];
 		}
@@ -75,7 +77,7 @@ public class StackArray implements Stack, ADT{
 				return values[i-1];
 			}
 		}
-		return values[values.length];
+		return values[values.length-1];
 	}
 
 	@Override

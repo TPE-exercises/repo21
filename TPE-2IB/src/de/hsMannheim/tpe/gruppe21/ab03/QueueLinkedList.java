@@ -14,6 +14,7 @@ public class QueueLinkedList implements Queue, ADT {
 	
 	public QueueLinkedList(int size){
 		this.size = size;
+		values = new LinkedList();
 	}
 	
 	
@@ -21,17 +22,16 @@ public class QueueLinkedList implements Queue, ADT {
 	public boolean enter(Object element) throws OverflowException {
 		try{
 			if(this.values.size()>= this.size){
-				throw new OverflowException("Maximale Groesse dieser Liste(" + this.size + ") erreicht.", element);
+				throw new OverflowException("List is full there is no place for: ", element);
 			}
 			else{
 				this.values.addLast(element);
-				this.size = this.values.size();
 			}
 		}catch(OverflowException oexc){
 			if(exceptionFlag == 0){
 				this.size *= 2;
 				this.values.addLast(element);
-				this.size = this.values.size();
+				exceptionFlag++;
 			}
 			else{
 				throw oexc;

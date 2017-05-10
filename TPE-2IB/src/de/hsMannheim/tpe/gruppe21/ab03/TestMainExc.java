@@ -58,7 +58,12 @@ public class TestMainExc {
 
 	}
 	
-	
+	/**
+	 * Lets u decide if you want to enter a Integer or a String
+	 * 
+	 * @param actual workingADT
+	 * @throws OverflowException if ADT gets to full for its size
+	 */
 	private static void enterADT(ADT workingADT) throws OverflowException{
 		println("|     Choose Object   |");
 		println("|0:   Integer         |");
@@ -86,9 +91,12 @@ public class TestMainExc {
 	}
 	}
 
+	/**
+	 * Method to choose a ADT to work with
+	 * @return ADT to work with
+	 */
 	private static ADT chooseADT() {
 		printADTMenu();
-
 		int input = readInt();
 		readLine();
 		switch (input) {
@@ -106,13 +114,16 @@ public class TestMainExc {
 			return stackList;
 
 		default:
-			println("u get a QueueArray");
+			println("You get a QueueArray");
 			return queueArr;
 
 		}
 
 	}
 
+	/**
+	 * Prints the choose menu for the ADTs
+	 */
 	private static void printADTMenu() {
 		println("|     Choose ADT      |");
 		println("|0:   QueueArray      |");
@@ -121,6 +132,10 @@ public class TestMainExc {
 		println("|3:   StackLinkedList |");
 	}
 
+	
+	/**
+	 * Prints the main menu for actions
+	 */
 	private static void printMainMenu() {
 		println("|     Choose action   |");
 		println("|0:   enter           |");
@@ -129,6 +144,7 @@ public class TestMainExc {
 		println("|3:   isEmpty         |");
 		println("|4:   size            |");
 		println("|10:  change ADT      |");
+		println("|50:  STOP            |");
 	}
 
 }

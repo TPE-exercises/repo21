@@ -26,7 +26,7 @@ public class QueueArray implements Queue, ADT {
 					}
 				}
 			} else {
-				throw new OverflowException("Letztes Object im Array war nicht null", element);
+				throw new OverflowException("Queue is full there is no place for: ", element);
 			}
 		} catch (OverflowException oexc) {
 			if (exceptionFlag == 0) {
@@ -41,7 +41,7 @@ public class QueueArray implements Queue, ADT {
 	}
 
 	private Object[] doublesSize() {
-		Object[] doubled = new Object[this.values.length * 2];
+		Object[] doubled = new Object[(this.values.length * 2)];
 		for (int i = 0; i < this.values.length; i++) {
 			doubled[i] = values[i];
 		}
