@@ -15,7 +15,7 @@ public class StackArray implements Stack, ADT{
 	@Override
 	public boolean enter(Object element) throws OverflowException{
 		try{
-			if(values[values.length -1] != null){
+			if(values[values.length -1] == null){
 				for(int i = 0; i < values.length; i++){
 					if(values[i] == null){
 						values[i] = element;

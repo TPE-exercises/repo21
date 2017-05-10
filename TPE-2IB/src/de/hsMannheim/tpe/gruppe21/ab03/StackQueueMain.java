@@ -80,6 +80,7 @@ public class StackQueueMain {
 			String string = readLine();
 			workingADT.enter(string);
 			println(string + " added");
+			
 			break;
 			
 	}
