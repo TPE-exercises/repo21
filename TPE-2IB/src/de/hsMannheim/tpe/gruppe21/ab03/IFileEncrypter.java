@@ -20,8 +20,9 @@ public interface IFileEncrypter {
 	 * File gets decrypted
 	 * @param sourceDirectory file to decrypt
 	 * @return decrypted file
+	 * @throws IOException 
 	 */
-	public File decrypt(File sourceDirectory);
+	public File decrypt(File sourceDirectory) throws IOException;
 	
 
 }

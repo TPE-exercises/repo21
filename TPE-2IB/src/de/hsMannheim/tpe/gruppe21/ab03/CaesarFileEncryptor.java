@@ -26,6 +26,14 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 		return new File(encryptedFilePath);
 	}
 	
+	@Override
+	public File decrypt(File sourceDirectory) throws IOException {
+		String decryptedFilePath = createFilePath(sourceDirectory, false);
+		String sourceFilePath = sourceDirectory.getAbsolutePath();
+		decryptRecursively(sourceDirectory, decryptedFilePath, sourceFilePath);
+		return new File(decryptedFilePath);
+	}
+	
 	public void encryptRecursively(File sourceDirectory, String encryptedFilePath, String sourceFilePath) throws IOException{
 		if(!sourceDirectory.isFile()){
 			File[] nextOnes = sourceDirectory.listFiles();
@@ -48,6 +56,28 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 		}
 	}
 	
+	public void decryptRecursively(File sourceDirectory, String decryptedFilePath, String sourceFilePath) throws IOException{
+		if(!sourceDirectory.isFile()){
+			File[] nextOnes = sourceDirectory.listFiles();
+			File dire = new File(decryptedFilePath);
+			dire.mkdirs();
+			for(int i = 0; i < nextOnes.length; i++){
+				String decryptedFilePathOfThisOne = decryptedFilePath + "\\" + nextOnes[i].getName();
+				String sourceFilePathOfThisOne = sourceFilePath + "\\" + nextOnes[i].getName();
+				
+				//---------PRINT--------
+				System.out.println(sourceFilePathOfThisOne);
+				System.out.println(decryptedFilePathOfThisOne);
+				//---------PRINT--------
+				
+				decryptRecursively(nextOnes[i], decryptedFilePathOfThisOne, sourceFilePathOfThisOne);
+			}
+		}
+		else if(sourceDirectory.isFile() && sourceDirectory.getName().toLowerCase().endsWith(".txt")){
+			decryptRealFile(sourceFilePath, decryptedFilePath);
+		}
+	}
+	
 	/**
 	 * works only if File.isFile() is true
 	 * @param sourceDirectory
@@ -56,31 +86,38 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 	 */
 	public void encryptRealFile(String sourceDirectory, String encryptDirectory) throws IOException{
 		if(new File(sourceDirectory).isFile()){
-			BufferedReader buffreader = new BufferedReader(new FileReader(sourceDirectory));
+			BufferedReader buffReader = new BufferedReader(new FileReader(sourceDirectory));
 			CaesarWriter caesarWriter = new CaesarWriter(new FileWriter(encryptDirectory), this.key);
 			
-			String toEncrypt = "";
-			while(toEncrypt != null){
-				toEncrypt = buffreader.readLine();
+			String toEncrypt;
+			do{
+				toEncrypt = buffReader.readLine();
 				if(toEncrypt != null){
 					caesarWriter.write(toEncrypt + "\n");
 				}
-			}
+			}while(toEncrypt != null);
 			
 			caesarWriter.close();
-			buffreader.close();
+			buffReader.close();
 		}
 	}
-
-	@Override
-	public File decrypt(File sourceDirectory) {
-		String decryptedFilePath = createFilePath(sourceDirectory, false);
-		decryptRecursively(sourceDirectory, decryptedFilePath);
-		return new File(decryptedFilePath);
-	}
 	
-	public void decryptRecursively(File sourceDirectory, String filePath){
-		
+	public void decryptRealFile(String sourceDirectory, String decryptDirectory) throws IOException{
+		if(new File(sourceDirectory).isFile()){
+			CaesarReader caesarReader = new CaesarReader(new FileReader(sourceDirectory), 5);
+			FileWriter fileWriter = new FileWriter(decryptDirectory);
+			
+			int toDecrypt;
+			do{
+				toDecrypt = (caesarReader.read());
+				if(toDecrypt != -1){
+					fileWriter.write(toDecrypt);
+				}
+			}while(toDecrypt != -1);
+			
+			fileWriter.close();
+			caesarReader.close();
+		}
 	}
 	
 	
