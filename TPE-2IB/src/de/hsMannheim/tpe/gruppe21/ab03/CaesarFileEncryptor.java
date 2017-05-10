@@ -1,8 +1,15 @@
 package de.hsMannheim.tpe.gruppe21.ab03;
 
-import java.io.File;
+import java.io.*;
 
 public class CaesarFileEncryptor implements IFileEncrypter {
+	
+	public static void main(String[] args) throws IOException{
+		File test = new File("caesar");
+		CaesarFileEncryptor cfe = new CaesarFileEncryptor(5);
+		cfe.encrypt(test);
+		
+	}
 	
 	
 	private int key;
@@ -12,44 +19,81 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 	}
 	
 	@Override
-	public File encrypt(File sourceDirectory) {
+	public File encrypt(File sourceDirectory) throws IOException {
 		String encryptedFilePath = createFilePath(sourceDirectory, true);
-		return encryptRecursively(sourceDirectory, encryptedFilePath);
+		String sourceFilePath = sourceDirectory.getAbsolutePath();
+		encryptRecursively(sourceDirectory, encryptedFilePath, sourceFilePath);
+		return new File(encryptedFilePath);
 	}
 	
-	public File encryptRecursively(File sourceDirectory, String filePath){
-		
+	public void encryptRecursively(File sourceDirectory, String encryptedFilePath, String sourceFilePath) throws IOException{
+		if(!sourceDirectory.isFile()){
+			File[] nextOnes = sourceDirectory.listFiles();
+			//TODO: wenn der folge Path eine Datei und kein Pfad ist, gibt list files null zurück, was tun?
+			for(int i = 0; i<nextOnes.length; i++){
+				encryptedFilePath = encryptedFilePath +"\\" + nextOnes[i].getName();
+				sourceFilePath = sourceFilePath + "\\" + nextOnes[i].getName();
+				encryptRecursively(nextOnes[i], encryptedFilePath, sourceFilePath);
+			}
+		}
+		else{
+			encryptRealFile(sourceFilePath, encryptedFilePath);
+		}
+	}
+	
+	/**
+	 * works only if File.isFile() is true
+	 * @param sourceDirectory
+	 * @return
+	 * @throws IOException 
+	 */
+	public void encryptRealFile(String sourceDirectory, String encryptDirectory) throws IOException{
+		if(new File(sourceDirectory).isFile()){
+			BufferedReader buffreader = new BufferedReader(new FileReader(sourceDirectory));
+			CaesarWriter caesarWriter = new CaesarWriter(new FileWriter(encryptDirectory), this.key);
+			
+			System.out.println(sourceDirectory);
+			System.out.println(encryptDirectory);
+			String toEncrypt = "";
+			while(toEncrypt != null){
+				toEncrypt = buffreader.readLine();
+				if(toEncrypt != null){
+					caesarWriter.write(toEncrypt);
+				}
+			}
+			
+			caesarWriter.close();
+			buffreader.close();
+		}
 	}
 
 	@Override
 	public File decrypt(File sourceDirectory) {
 		String decryptedFilePath = createFilePath(sourceDirectory, false);
-		return decryptRecursively(sourceDirectory, decryptedFilePath);
+		decryptRecursively(sourceDirectory, decryptedFilePath);
+		return new File(decryptedFilePath);
 	}
 	
-	public File decryptRecursively(File sourceDirectory, String filePath){
+	public void decryptRecursively(File sourceDirectory, String filePath){
 		
 	}
 	
 	
 	private String createFilePath(File sourceDirectory, boolean encrypt){
-		String endr = sourceDirectory.getPath();
+		String endr = sourceDirectory.getAbsolutePath();
 		if(encrypt){
 			endr += "_encrypted";
 		}
 		else{
 			endr += "_decrypted";
 		}
+		String testIsAvailible = endr;
 		int counter = 0;
-		if(new File(endr).exists()){
-			endr += "0";
-		}
-		while(new File(endr).exists()){
+		while(new File(testIsAvailible).exists()){
+			testIsAvailible = endr + counter;
 			counter++;
-			char[] endrChar = endr.toCharArray();
-			endrChar[endrChar.length-1] = (char) counter;
-			endr = new String(endrChar);
 		}
+		endr = testIsAvailible;
 		return endr;
 	}
 

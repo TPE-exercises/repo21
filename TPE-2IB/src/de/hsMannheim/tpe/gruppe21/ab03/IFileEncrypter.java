@@ -11,8 +11,9 @@ public interface IFileEncrypter {
 	 * File gets encrypted
 	 * @param sourceDirectory file to encrypt
 	 * @return encrypted file
+	 * @throws IOException 
 	 */
-	public File encrypt(File sourceDirectory);
+	public File encrypt(File sourceDirectory) throws IOException;
 	
 	
 	/**
