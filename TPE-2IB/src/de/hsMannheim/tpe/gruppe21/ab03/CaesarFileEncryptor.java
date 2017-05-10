@@ -29,7 +29,8 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 	public void encryptRecursively(File sourceDirectory, String encryptedFilePath, String sourceFilePath) throws IOException{
 		if(!sourceDirectory.isFile()){
 			File[] nextOnes = sourceDirectory.listFiles();
-			//TODO: wenn der folge Path eine Datei und kein Pfad ist, gibt list files null zurück, was tun?
+			File dire = new File(encryptedFilePath);
+			dire.mkdirs();
 			for(int i = 0; i<nextOnes.length; i++){
 				encryptedFilePath = encryptedFilePath +"\\" + nextOnes[i].getName();
 				sourceFilePath = sourceFilePath + "\\" + nextOnes[i].getName();
