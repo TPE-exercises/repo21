@@ -71,13 +71,10 @@ public class QueueArray implements Queue, ADT {
 	}
 
 	@Override
-	public Object front() throws UnderflowException{
-		if (this.isEmpty()) {
-			throw new UnderflowException("Queue is empty");
-		} else {
+	public Object front(){
 		return values[0]; 
 		}
-	}
+	
 
 	@Override
 	public boolean isEmpty() {

@@ -53,7 +53,7 @@ public class QueueLinkedList implements Queue, ADT {
 	
 
 	@Override
-	public Object front() throws UnderflowException {
+	public Object front() {
 		return this.values.getFirst();
 	}
 

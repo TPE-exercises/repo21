@@ -18,7 +18,7 @@ public interface ADT {
 	/**
 	 * @return first element of Queue
 	 */
-	public Object front() throws UnderflowException;
+	public Object front();
 	
 	
 	/**
