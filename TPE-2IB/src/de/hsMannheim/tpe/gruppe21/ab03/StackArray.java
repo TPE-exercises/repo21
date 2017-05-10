@@ -22,30 +22,30 @@ public class StackArray implements Stack, ADT{
 						break;
 					}
 				}
-				return true;
 			}
 			else{
 				throw new OverflowException("Queue is full there is no place for: " , element );
 			}
 		}catch(OverflowException oexc){
 			if(exceptionFlag == 0){
-				doublesSize();
+				doublesSize(element);
 				this.exceptionFlag++;
-				return false;
 			}
 			else{
 				throw oexc;
 			}
 		}
+		return true;
 		
 		
 	}
 	
-	private Object[] doublesSize(){
+	private Object[] doublesSize(Object element){
 		Object[] doubled = new Object[(this.values.length * 2)];
 		for(int i = 0; i < this.values.length; i++){
 			doubled[i] = values[i];
 		}
+		doubled[this.values.length] = element;
 		this.values = doubled;
 		return this.values;
 	}

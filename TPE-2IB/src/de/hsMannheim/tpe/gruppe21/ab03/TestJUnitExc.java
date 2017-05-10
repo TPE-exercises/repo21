@@ -6,13 +6,14 @@ import org.junit.Test;
 
 import de.hsMannheim.tpe.gruppe21.ab03.myutil.ADT;
 import de.hsMannheim.tpe.gruppe21.ab03.myutil.OverflowException;
+import de.hsMannheim.tpe.gruppe21.ab03.myutil.UnderflowException;
 
 public class TestJUnitExc {
 
 	@Test(expected = OverflowException.class)
 	public void overflowTestForStackArr() throws OverflowException {
 		ADT stackArr = new StackArray(5);
-		for (int i = 0; i <= 11; i++) {
+		for (int i = 1; i <= 11; i++) {
 			stackArr.enter(i);
 		}
 	}
@@ -20,7 +21,7 @@ public class TestJUnitExc {
 	@Test(expected = OverflowException.class)
 	public void overflowTestForQueueArr() throws OverflowException {
 		ADT queueArr = new QueueArray(5);
-		for (int i = 0; i <= 11; i++) {
+		for (int i = 1; i <= 11; i++) {
 			queueArr.enter(i);
 		}
 	}
@@ -28,7 +29,7 @@ public class TestJUnitExc {
 	@Test(expected = OverflowException.class)
 	public void overflowTestForStackLinkedList() throws OverflowException {
 		ADT stackList = new StackLinkedList(5);
-		for (int i = 0; i <= 11; i++) {
+		for (int i = 1; i <= 11; i++) {
 			stackList.enter(i);
 		}
 	}
@@ -36,7 +37,7 @@ public class TestJUnitExc {
 	@Test(expected = OverflowException.class)
 	public void overflowTestForQueueLinkedList() throws OverflowException {
 		ADT queueList = new QueueLinkedList(5);
-		for (int i = 0; i <= 11; i++) {
+		for (int i = 1; i <= 11; i++) {
 			queueList.enter(i);
 		}
 	}
@@ -76,23 +77,23 @@ public class TestJUnitExc {
 		ADT stackList = new StackLinkedList(5);
 		ADT queueList = new QueueLinkedList(5);
 		
-		for (int i = 0; i <= 10; i++) {
+		for (int i = 1; i <= 10; i++) {
 			stackArr.enter(i);
 		}
-		for (int i = 0; i <= 10; i++) {
+		for (int i = 1; i <= 10; i++) {
 			queueArr.enter(i);
 		}
-		for (int i = 0; i <= 10; i++) {
+		for (int i = 1; i <= 10; i++) {
 			stackList.enter(i);
 		}
-		for (int i = 0; i <= 10; i++) {
+		for (int i = 1; i <= 10; i++) {
 			queueList.enter(i);
 		}
 		
 		assertEquals(10, stackArr.front());
-		assertEquals(0, queueArr.front());
+		assertEquals(1, queueArr.front());
 		assertEquals(10, stackList.front());
-		assertEquals(0, queueList.front());
+		assertEquals(1, queueList.front());
 		
 		
 		
@@ -106,27 +107,52 @@ public class TestJUnitExc {
 		ADT stackList = new StackLinkedList(5);
 		ADT queueList = new QueueLinkedList(5);
 		
-		for(int i = 0; i <= 10; i++){
+		for(int i = 1; i <= 10; i++){
 			stackArr.enter(i);
 		}
 		
-		queueArr.enter(1);
-		queueArr.enter(1);
+		for(int i = 1; i <= 10; i++){
+			queueArr.enter(i);
+		}
 		
-		stackList.enter(1);
-		stackList.enter(1);
+		for(int i = 1; i <= 10; i++){
+			stackList.enter(i);
+		}
 		
-		queueList.enter(1);
-		queueList.enter(1);
+		for(int i = 1; i <= 10; i++){
+			queueList.enter(i);
+		}
 		
 		
 		assertEquals(10, stackArr.size());
-		assertEquals(2, queueArr.size());
-		assertEquals(2, stackList.size());
-		assertEquals(2, queueList.size());
+		assertEquals(10, queueArr.size());
+		assertEquals(10, stackList.size());
+		assertEquals(10, queueList.size());
 	}
 	
+	@Test(expected = UnderflowException.class)
+	public void underflowTestForStackArr() throws UnderflowException{
+		ADT stackArr = new StackArray(5);
+		stackArr.leave();
+	}
 	
+	@Test(expected = UnderflowException.class)
+	public void underflowTestForQueueArr() throws UnderflowException{
+		ADT queueArr = new QueueArray(5);
+		queueArr.leave();
+	}
+	
+	@Test(expected = UnderflowException.class)
+	public void underflowTestForStackLinkedList() throws UnderflowException{
+		ADT stackList = new StackLinkedList(5);
+		stackList.leave();
+	}
+	
+	@Test(expected = UnderflowException.class)
+	public void underflowTestForQueueLinkedList() throws UnderflowException{
+		ADT queueList = new QueueLinkedList(5);
+		queueList.leave();
+	}
 	
 
 }
