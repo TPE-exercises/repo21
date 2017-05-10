@@ -32,12 +32,18 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 			File dire = new File(encryptedFilePath);
 			dire.mkdirs();
 			for(int i = 0; i<nextOnes.length; i++){
-				encryptedFilePath = encryptedFilePath +"\\" + nextOnes[i].getName();
-				sourceFilePath = sourceFilePath + "\\" + nextOnes[i].getName();
-				encryptRecursively(nextOnes[i], encryptedFilePath, sourceFilePath);
+				String encryptedFilePathOfThisOne = encryptedFilePath +"\\" + nextOnes[i].getName();
+				String sourceFilePathOfThisOne = sourceFilePath + "\\" + nextOnes[i].getName();
+				
+				//---------PRINT--------
+				System.out.println(sourceFilePathOfThisOne);
+				System.out.println(encryptedFilePathOfThisOne);
+				//---------PRINT--------
+				
+				encryptRecursively(nextOnes[i], encryptedFilePathOfThisOne, sourceFilePathOfThisOne);
 			}
 		}
-		else{
+		else if(sourceDirectory.isFile() && sourceDirectory.getName().toLowerCase().endsWith(".txt")){
 			encryptRealFile(sourceFilePath, encryptedFilePath);
 		}
 	}
@@ -53,13 +59,11 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 			BufferedReader buffreader = new BufferedReader(new FileReader(sourceDirectory));
 			CaesarWriter caesarWriter = new CaesarWriter(new FileWriter(encryptDirectory), this.key);
 			
-			System.out.println(sourceDirectory);
-			System.out.println(encryptDirectory);
 			String toEncrypt = "";
 			while(toEncrypt != null){
 				toEncrypt = buffreader.readLine();
 				if(toEncrypt != null){
-					caesarWriter.write(toEncrypt);
+					caesarWriter.write(toEncrypt + "\n");
 				}
 			}
 			
