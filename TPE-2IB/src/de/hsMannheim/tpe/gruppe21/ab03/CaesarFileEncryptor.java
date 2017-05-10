@@ -36,7 +36,15 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 		return new File(decryptedFilePath);
 	}
 	
-	public void encryptRecursively(File sourceDirectory, String encryptedFilePath, String sourceFilePath) throws IOException{
+	/**
+	 * encrypt the file,
+	 * if its a path, files of this path get encrypted recursively
+	 * @param sourceDirectory file to encrypt
+	 * @param encryptedFilePath path of the new file, with encrypted file
+	 * @param sourceFilePath file Path of the file to encrypt
+	 * @throws IOException
+	 */
+	private void encryptRecursively(File sourceDirectory, String encryptedFilePath, String sourceFilePath) throws IOException{
 		if(!sourceDirectory.isFile()){
 			File[] nextOnes = sourceDirectory.listFiles();
 			File dire = new File(encryptedFilePath);
@@ -58,7 +66,15 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 		}
 	}
 	
-	public void decryptRecursively(File sourceDirectory, String decryptedFilePath, String sourceFilePath) throws IOException{
+	/**
+	 * encrypt the file,
+	 * if its a path, files of this path get decrypted recursively
+	 * @param sourceDirectory file to encrypt
+	 * @param decryptedFilePath path of the new file, with decrypted file
+	 * @param sourceFilePath file path of the file to decrypt
+	 * @throws IOException
+	 */
+	private void decryptRecursively(File sourceDirectory, String decryptedFilePath, String sourceFilePath) throws IOException{
 		if(!sourceDirectory.isFile()){
 			File[] nextOnes = sourceDirectory.listFiles();
 			File dire = new File(decryptedFilePath);
@@ -81,12 +97,12 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 	}
 	
 	/**
-	 * works only if File.isFile() is true
-	 * @param sourceDirectory
-	 * @return
+	 * encrypt files if there are real files
+	 * @param sourceDirectory path of file to encrypt
+	 * @param encryptDirectory path of file with encrypted file
 	 * @throws IOException 
 	 */
-	public void encryptRealFile(String sourceDirectory, String encryptDirectory) throws IOException{
+	private void encryptRealFile(String sourceDirectory, String encryptDirectory) throws IOException{
 		if(new File(sourceDirectory).isFile()){
 			BufferedReader buffReader = new BufferedReader(new FileReader(sourceDirectory));
 			CaesarWriter caesarWriter = new CaesarWriter(new FileWriter(encryptDirectory), this.key);
@@ -104,7 +120,13 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 		}
 	}
 	
-	public void decryptRealFile(String sourceDirectory, String decryptDirectory) throws IOException{
+	/**
+	 * decrypt files if they are real files
+	 * @param sourceDirectory path of the file to decrypt
+	 * @param decryptDirectory path of file with decrypted file
+	 * @throws IOException
+	 */
+	private void decryptRealFile(String sourceDirectory, String decryptDirectory) throws IOException{
 		if(new File(sourceDirectory).isFile()){
 			CaesarReader caesarReader = new CaesarReader(new FileReader(sourceDirectory), 5);
 			FileWriter fileWriter = new FileWriter(decryptDirectory);
@@ -127,7 +149,12 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 		}
 	}
 	
-	
+	/**
+	 * creates the file path for encrypted or decrypted files by adding "_encrypted" or "_decrypted" to the original String
+	 * @param sourceDirectory file with the path to change to the encrypted or decrypted version
+	 * @param encrypt true, if it should be encrypted, false, if it should be decrypted
+	 * @return the new file path for the encrypted or decrypted files
+	 */
 	private String createFilePath(File sourceDirectory, boolean encrypt){
 		String endr = sourceDirectory.getAbsolutePath();
 		if(encrypt){
