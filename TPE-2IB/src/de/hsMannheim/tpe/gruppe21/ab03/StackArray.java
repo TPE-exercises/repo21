@@ -2,7 +2,7 @@ package de.hsMannheim.tpe.gruppe21.ab03;
 
 import de.hsMannheim.tpe.gruppe21.ab03.myutil.*;
 
-public class StackArray implements Stack{
+public class StackArray implements Stack, ADT{
 
 	private Object[] values;
 	private int exceptionFlag = 0;
@@ -13,7 +13,7 @@ public class StackArray implements Stack{
 	}
 	
 	@Override
-	public Stack push(Object element) throws OverflowException{
+	public boolean enter(Object element) throws OverflowException{
 		try{
 			if(values[values.length -1] != null){
 				for(int i = 0; i < values.length; i++){
@@ -36,7 +36,7 @@ public class StackArray implements Stack{
 			}
 		}
 		
-		return this;
+		return true;
 	}
 	
 	private Object[] doublesSize(){
@@ -50,7 +50,7 @@ public class StackArray implements Stack{
 	
 
 	@Override
-	public Object pop() throws UnderflowException{
+	public Object leave() throws UnderflowException{
 		if(this.isEmpty()){
 			throw new UnderflowException("");
 		}
@@ -69,7 +69,7 @@ public class StackArray implements Stack{
 	}
 
 	@Override
-	public Object top() {
+	public Object front() {
 		for(int i = 1; i < values.length; i++){
 			if(values[i] == null){
 				return values[i-1];

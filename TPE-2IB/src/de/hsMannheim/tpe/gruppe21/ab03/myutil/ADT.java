@@ -1,6 +1,6 @@
 package de.hsMannheim.tpe.gruppe21.ab03.myutil;
 
-public interface Queue {
+public interface ADT {
 	/**
 	 * if queue is full for the first time, size gets doubled, else overflow exception
 	 * @param element to enter
@@ -34,3 +34,4 @@ public interface Queue {
 	 */
 	public int size();
 }
+

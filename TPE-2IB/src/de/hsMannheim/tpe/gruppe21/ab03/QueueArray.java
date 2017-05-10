@@ -1,10 +1,11 @@
 package de.hsMannheim.tpe.gruppe21.ab03;
 
+import de.hsMannheim.tpe.gruppe21.ab03.myutil.ADT;
 import de.hsMannheim.tpe.gruppe21.ab03.myutil.OverflowException;
 import de.hsMannheim.tpe.gruppe21.ab03.myutil.Queue;
 import de.hsMannheim.tpe.gruppe21.ab03.myutil.UnderflowException;
 
-public class QueueArray implements Queue {
+public class QueueArray implements Queue, ADT {
 
 	private Object[] values;
 	private int exceptionFlag = 0;
@@ -12,9 +13,10 @@ public class QueueArray implements Queue {
 	QueueArray(int size) {
 		this.values = new Object[size];
 	}
+	
 
 	@Override
-	public Queue enter(Object element) throws OverflowException {
+	public boolean enter(Object element) throws OverflowException {
 		try {
 			if (values[values.length - 1] != null) {
 				for (int i = 0; i < values.length; i++) {
@@ -35,7 +37,7 @@ public class QueueArray implements Queue {
 			}
 		}
 
-		return this;
+		return true;
 	}
 
 	private Object[] doublesSize() {

@@ -2,7 +2,7 @@ package de.hsMannheim.tpe.gruppe21.ab03;
 
 import de.hsMannheim.tpe.gruppe21.ab03.myutil.*;
 
-public class StackLinkedList implements Stack {
+public class StackLinkedList implements Stack, ADT {
 
 	private int size;
 	private LinkedList values;
@@ -13,7 +13,7 @@ public class StackLinkedList implements Stack {
 	}
 	
 	@Override
-	public Stack push(Object element) throws OverflowException {
+	public boolean enter(Object element) throws OverflowException {
 		try{
 			if(this.values.size()>= this.size){
 				throw new OverflowException("Maximale Groesse dieser Liste(" + this.size + ") erreicht.", element);
@@ -32,11 +32,11 @@ public class StackLinkedList implements Stack {
 				throw oexc;
 			}
 		}
-		return this;
+		return true;
 	}
 
 	@Override
-	public Object pop() throws UnderflowException {
+	public Object leave() throws UnderflowException {
 		if(this.values.isEmpty()){
 			throw new UnderflowException("Stack ist leer.");
 		}
@@ -47,7 +47,7 @@ public class StackLinkedList implements Stack {
 	}
 
 	@Override
-	public Object top() {
+	public Object front() {
 		return this.values.getFirst();
 	}
 

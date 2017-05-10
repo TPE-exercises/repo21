@@ -1,11 +1,12 @@
 package de.hsMannheim.tpe.gruppe21.ab03;
 
+import de.hsMannheim.tpe.gruppe21.ab03.myutil.ADT;
 import de.hsMannheim.tpe.gruppe21.ab03.myutil.LinkedList;
 import de.hsMannheim.tpe.gruppe21.ab03.myutil.OverflowException;
 import de.hsMannheim.tpe.gruppe21.ab03.myutil.Queue;
 import de.hsMannheim.tpe.gruppe21.ab03.myutil.UnderflowException;
 
-public class QueueLinkedList implements Queue {
+public class QueueLinkedList implements Queue, ADT {
 
 	private int size;
 	private LinkedList values;
@@ -17,7 +18,7 @@ public class QueueLinkedList implements Queue {
 	
 	
 	@Override
-	public Queue enter(Object element) throws OverflowException {
+	public boolean enter(Object element) throws OverflowException {
 		try{
 			if(this.values.size()>= this.size){
 				throw new OverflowException("Maximale Groesse dieser Liste(" + this.size + ") erreicht.", element);
@@ -36,7 +37,7 @@ public class QueueLinkedList implements Queue {
 				throw oexc;
 			}
 		}
-		return this;
+		return true;
 	}
 
 	@Override

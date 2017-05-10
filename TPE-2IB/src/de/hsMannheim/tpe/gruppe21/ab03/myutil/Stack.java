@@ -10,7 +10,7 @@ public interface Stack {
 	 * @return Stack with element
 	 * @throws OverflowException 
 	 */
-	public Stack push(Object element) throws OverflowException;
+	public boolean enter(Object element) throws OverflowException;
 	
 	
 	/**
@@ -18,14 +18,14 @@ public interface Stack {
 	 * @return removed element
 	 * @throws UnderflowException
 	 */
-	public Object pop() throws UnderflowException;
+	public Object leave() throws UnderflowException;
 	
 	
 	/**
 	 * Get element on top of stack
 	 * @return element on top of the stack
 	 */
-	public Object top();
+	public Object front();
 	
 	
 	/**
