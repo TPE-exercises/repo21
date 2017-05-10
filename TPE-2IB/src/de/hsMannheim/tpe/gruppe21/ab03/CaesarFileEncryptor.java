@@ -5,10 +5,12 @@ import java.io.*;
 public class CaesarFileEncryptor implements IFileEncrypter {
 	
 	public static void main(String[] args) throws IOException{
-		File test = new File("caesar");
+		File testEncr = new File("caesar");
 		CaesarFileEncryptor cfe = new CaesarFileEncryptor(5);
-		cfe.encrypt(test);
+		cfe.encrypt(testEncr);
 		
+		File testDecr = new File("caesar_encrypted");
+		cfe.decrypt(testDecr);
 	}
 	
 	
@@ -110,10 +112,15 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 			int toDecrypt;
 			do{
 				toDecrypt = (caesarReader.read());
-				if(toDecrypt != -1){
+				
+				//------------PRINT---------------
+				System.out.println("toDecrypt: " + toDecrypt);
+				//------------PRINT---------------
+				
+				if(toDecrypt != -1 && toDecrypt != 65535){
 					fileWriter.write(toDecrypt);
 				}
-			}while(toDecrypt != -1);
+			}while(toDecrypt != -1 && toDecrypt!= 65535);
 			
 			fileWriter.close();
 			caesarReader.close();
