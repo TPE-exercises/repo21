@@ -84,11 +84,12 @@ public class QueueArray implements Queue, ADT {
 
 	@Override
 	public int size() {
+		int size = 0;
 		for(int i = 0; i < values.length; i++){
-			if(values[i] == null){
-				return i;
+			if(values[i] != null){
+				size++;
 			}
 		}
-		return values.length;
+		return size;
 	}
 }
