@@ -9,43 +9,43 @@ public class QueueArray implements Queue, ADT {
 
 	private Object[] values;
 	private int exceptionFlag = 0;
+	private int inPointer;
+	private int outPointer;
 
 	QueueArray(int size) {
 		this.values = new Object[size];
+		this.inPointer = 0;
+		this.outPointer = 0;
 	}
 	
 
 	@Override
-	public boolean enter(Object element) throws OverflowException {
+	public boolean enter(Object element) {
 		try {
-			if (values[values.length - 1] == null) {
-				for (int i = 0; i < values.length; i++) {
-					if (values[i] == null) {
-						values[i] = element;
-						break;
-					}
-				}
-			} else {
-				throw new OverflowException("Queue is full there is no place for: ", element);
+			this.values[inPointer] = element;
+			this.inPointer ++;
+			if(inPointer >= this.values.length){
+				throw new OverflowException("inPointer ist übergelaufen", element);
 			}
 		} catch (OverflowException oexc) {
 			if (exceptionFlag == 0) {
-				doublesSize(element);
+				doublesSize();
+				this.values[inPointer] = element;
+				this.inPointer++;
 				this.exceptionFlag++;
 			} else {
-				throw oexc;
+				this.inPointer = 0;
+				System.out.println(oexc.toString());
 			}
 		}
-
 		return true;
 	}
 
-	private Object[] doublesSize(Object element) {
+	private Object[] doublesSize() {
 		Object[] doubled = new Object[(this.values.length * 2)];
 		for (int i = 0; i < this.values.length; i++) {
 			doubled[i] = values[i];
 		}
-		doubled[this.values.length] = element;
 		this.values = doubled;
 		return this.values;
 	}
@@ -55,16 +55,11 @@ public class QueueArray implements Queue, ADT {
 		if (this.isEmpty()) {
 			throw new UnderflowException("Queue is empty");
 		} else {
-			Object ret = new Object();
-			ret = values[0];
-			Object leavedArray[] = new Object[this.values.length];
-			for (int i = 0; i < values.length - 1; i++) {
-				if (values[i + 1] == null) {
-					break;
-				}
-				leavedArray[i] = values[i + 1];
+			Object ret = this.values[this.outPointer];
+			this.outPointer++;
+			if(this.outPointer>= this.values.length){
+				this.outPointer = 0;
 			}
-			this.values = leavedArray;
 			return ret;
 
 		}
@@ -79,11 +74,12 @@ public class QueueArray implements Queue, ADT {
 
 	@Override
 	public boolean isEmpty() {
-		if (values[0] == null) {
-			return true;
-		} else {
-			return false;
+		for(int i = 0; i < this.values.length; i++){
+			if(this.values[i] != null){
+				return false;
+			}
 		}
+		return true;
 	}
 
 	@Override
@@ -95,5 +91,4 @@ public class QueueArray implements Queue, ADT {
 		}
 		return values.length;
 	}
-
 }
