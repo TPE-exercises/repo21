@@ -18,7 +18,7 @@ public class TestJUnitExc {
 		}
 	}
 
-	@Test(expected = OverflowException.class)
+	@Test
 	public void overflowTestForQueueArr() throws OverflowException {
 		ADT queueArr = new QueueArray(5);
 		for (int i = 1; i <= 11; i++) {
