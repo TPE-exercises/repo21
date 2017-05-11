@@ -22,19 +22,32 @@ public class QueueArray implements Queue, ADT {
 	@Override
 	public boolean enter(Object element) {
 		try {
-			this.values[inPointer] = element;
-			this.inPointer ++;
 			if(inPointer >= this.values.length){
 				throw new OverflowException("inPointer ist übergelaufen", element);
 			}
+			else{
+				this.values[inPointer] = element;
+				if(this.inPointer == this.outPointer){
+					this.outPointer++;
+					if(this.outPointer >= this.values.length){
+						this.outPointer = 0;
+					}
+				}
+				this.inPointer ++;
+			}
 		} catch (OverflowException oexc) {
 			if (exceptionFlag == 0) {
-				doublesSize();
+				this.doublesSize();
 				this.values[inPointer] = element;
 				this.inPointer++;
 				this.exceptionFlag++;
 			} else {
 				this.inPointer = 0;
+				this.values[this.inPointer] = element;
+				if(this.outPointer == this.inPointer){
+					this.outPointer++;
+				}
+				this.inPointer++;
 				System.out.println(oexc.toString());
 			}
 		}
