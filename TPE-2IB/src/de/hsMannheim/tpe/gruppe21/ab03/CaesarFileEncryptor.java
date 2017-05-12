@@ -5,14 +5,13 @@ import java.io.*;
 public class CaesarFileEncryptor implements IFileEncrypter {
 	
 	public static void main(String[] args) throws IOException{
-		File testEncr = new File("cae");
+		File testEncr = new File("caes");
 		File testDecr = new File("caar_encrypted");
 		
 		CaesarFileEncryptor cfe = new CaesarFileEncryptor(5);
 		cfe.encrypt(testEncr);
 		cfe.decrypt(testDecr);
 	}
-	
 	
 	private int key;
 	
@@ -32,7 +31,7 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 			return new File(encryptedFilePath);
 		}catch(FileNotFoundException fnfexc){
 			System.out.println("File not Found:");
-			System.out.println(fnfexc.getMessage());
+			System.out.println(fnfexc.getMessage()+ "\n\n");
 		}
 		return null;
 	}
@@ -49,7 +48,7 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 			return new File(decryptedFilePath);
 		}catch(FileNotFoundException fnfexc){
 			System.out.println("File not Found:");
-			System.out.println(fnfexc.getMessage());
+			System.out.println(fnfexc.getMessage()+ "\n\n");
 		}
 		return null;
 	}
