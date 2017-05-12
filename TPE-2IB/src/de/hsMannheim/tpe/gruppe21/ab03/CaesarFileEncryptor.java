@@ -139,10 +139,10 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 				System.out.println("toDecrypt: " + toDecrypt);
 				//------------PRINT---------------
 				
-				if(toDecrypt != -1 && toDecrypt != 65535){
+				if(toDecrypt != -1){
 					fileWriter.write(toDecrypt);
 				}
-			}while(toDecrypt != -1 && toDecrypt!= 65535);
+			}while(toDecrypt != -1);
 			
 			fileWriter.close();
 			caesarReader.close();

@@ -16,8 +16,11 @@ public class CaesarReader extends FilterReader {
 	}
 
 	@Override
-	public int read() throws IOException {		
-		return caesarDecrypt((char)super.read());
+	public int read() throws IOException {	
+		int toDecrypt = super.read();
+		if(toDecrypt == -1){
+			return -1;
+		}else return caesarDecrypt((char)toDecrypt);
 	}
 
 	@Override
