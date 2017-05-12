@@ -5,8 +5,8 @@ import java.io.*;
 public class CaesarFileEncryptor implements IFileEncrypter {
 	
 	public static void main(String[] args) throws IOException{
-		File testEncr = new File("caesar");
-		File testDecr = new File("caesar_encrypted");
+		File testEncr = new File("cae");
+		File testDecr = new File("caar_encrypted");
 		
 		CaesarFileEncryptor cfe = new CaesarFileEncryptor(5);
 		cfe.encrypt(testEncr);
@@ -23,17 +23,35 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 	@Override
 	public File encrypt(File sourceDirectory) throws IOException {
 		String encryptedFilePath = createFilePath(sourceDirectory, true);
-		String sourceFilePath = sourceDirectory.getAbsolutePath();
-		encryptRecursively(sourceDirectory, encryptedFilePath, sourceFilePath);
-		return new File(encryptedFilePath);
+		try{
+			if(!sourceDirectory.exists()){
+				throw new FileNotFoundException(sourceDirectory.getAbsolutePath());
+			}
+			String sourceFilePath = sourceDirectory.getAbsolutePath();
+			encryptRecursively(sourceDirectory, encryptedFilePath, sourceFilePath);
+			return new File(encryptedFilePath);
+		}catch(FileNotFoundException fnfexc){
+			System.out.println("File not Found:");
+			System.out.println(fnfexc.getMessage());
+		}
+		return null;
 	}
 	
 	@Override
 	public File decrypt(File sourceDirectory) throws IOException {
 		String decryptedFilePath = createFilePath(sourceDirectory, false);
-		String sourceFilePath = sourceDirectory.getAbsolutePath();
-		decryptRecursively(sourceDirectory, decryptedFilePath, sourceFilePath);
-		return new File(decryptedFilePath);
+		try{
+			if(!sourceDirectory.exists()){
+				throw new FileNotFoundException(sourceDirectory.getAbsolutePath());
+			}
+			String sourceFilePath = sourceDirectory.getAbsolutePath();
+			decryptRecursively(sourceDirectory, decryptedFilePath, sourceFilePath);	
+			return new File(decryptedFilePath);
+		}catch(FileNotFoundException fnfexc){
+			System.out.println("File not Found:");
+			System.out.println(fnfexc.getMessage());
+		}
+		return null;
 	}
 	
 	/**
