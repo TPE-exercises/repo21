@@ -6,10 +6,10 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 	
 	public static void main(String[] args) throws IOException{
 		File testEncr = new File("caesar");
+		File testDecr = new File("caesar_encrypted");
+		
 		CaesarFileEncryptor cfe = new CaesarFileEncryptor(5);
 		cfe.encrypt(testEncr);
-		
-		File testDecr = new File("caesar_encrypted");
 		cfe.decrypt(testDecr);
 	}
 	
