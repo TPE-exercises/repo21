@@ -105,7 +105,7 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 	private void encryptRealFile(String sourceDirectory, String encryptDirectory) throws IOException{
 		if(new File(sourceDirectory).isFile()){
 			BufferedReader buffReader = new BufferedReader(new FileReader(sourceDirectory));
-			CaesarWriter caesarWriter = new CaesarWriter(new FileWriter(encryptDirectory), this.key);
+			CaesarWriter caesarWriter = new CaesarWriter(new BufferedWriter(new FileWriter(encryptDirectory)), this.key);
 			
 			String toEncrypt;
 			do{
@@ -128,23 +128,19 @@ public class CaesarFileEncryptor implements IFileEncrypter {
 	 */
 	private void decryptRealFile(String sourceDirectory, String decryptDirectory) throws IOException{
 		if(new File(sourceDirectory).isFile()){
-			CaesarReader caesarReader = new CaesarReader(new FileReader(sourceDirectory), 5);
-			FileWriter fileWriter = new FileWriter(decryptDirectory);
+			CaesarReader caesarReader = new CaesarReader(new BufferedReader(new FileReader(sourceDirectory)), 5);
+			BufferedWriter buffWriter = new BufferedWriter(new FileWriter(decryptDirectory));
 			
 			int toDecrypt;
+			
 			do{
 				toDecrypt = (caesarReader.read());
-				
-				//------------PRINT---------------
-				System.out.println("toDecrypt: " + toDecrypt);
-				//------------PRINT---------------
-				
 				if(toDecrypt != -1){
-					fileWriter.write(toDecrypt);
+					buffWriter.write(toDecrypt);
 				}
 			}while(toDecrypt != -1);
 			
-			fileWriter.close();
+			buffWriter.close();
 			caesarReader.close();
 		}
 	}
