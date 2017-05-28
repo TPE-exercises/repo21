@@ -1,1 +1,0 @@
-Das ist ein Test mit vielen Grenzfällen A Z a z @ { Ä Ö Ü ä ö ü .
