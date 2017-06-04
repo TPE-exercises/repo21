@@ -1,17 +1,27 @@
 package de.hsMannheim.tpe.gruppe21.ab04.ThreadsTheory;
 
-public class LivenessHazard {
+public class LivenessHazard extends Thread{
 
+	public static int zahl = 10;
+	
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		System.out.println("Zahl: " + zahl);
+		LivenessHazard ersterThread;
+		LivenessHazard zweiterThread;
+		ersterThread  = new LivenessHazard(zweiterThread);
+		zweiterThread = new LivenessHazard(ersterThread);
+		ersterThread.start();
+		zweiterThread.start();
+		System.out.println("Zahl: " + zahl);
 	}
 	
 	/*
 	2. Liveness	Hazards	
-	Probleme bei denen ein Programm mit mehreren Threads in einen Zustand gerät, bei dem es keine Fortschritte mehr machen kann. Zum Beispiel will
-	jemand Geld von der Bank abheben und dabei findet dieser Aufruf synchronisiert statt. Jetzt ist jedoch nicht genügend Geld auf dem Konto und 
-	es wird so lange gewartet bis wieder genügend Geld vorhanden ist. Leider kann aber kein Geld auf das Konto gebucht werden, weil die Abbuch-Funktion
-	die Geld-einzahl funktion blockiert.
+	
 	*/
+	
+	public void run(){
+		
+	}
 }

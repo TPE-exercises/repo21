@@ -1,43 +1,41 @@
 package de.hsMannheim.tpe.gruppe21.ab04.ThreadsTheory;
 
-public class SafetyHazard{
+public class SafetyHazard extends Thread{
 
-	public static int kontostand = 1000;
+	public static int zahl = 10;
 	
-	public static void main(String[] args) {
-		System.out.println("Kontostand: " + kontostand);
-		HazardThread abb500 = new HazardThread(-500);
-		
+	public static void main(String[] args) throws InterruptedException {
+		System.out.println("Zahl: " + zahl);
+		SafetyHazard abb500 = new SafetyHazard(3);
+		SafetyHazard zub500 = new SafetyHazard(-3);
+		abb500.start();
+		zub500.start();
+		abb500.join();
+		zub500.join();
+		System.out.println("Zahl: " + zahl);
 	}
 	
 	/*
-	1: Safety Hazards 
-	Wenn mehrere Threads gleichzeitig auf Resoursen zugreifen wollen müssen diese synchornisiert werden. 
-	Ansonsten kann es ein, dass zum Beispiel ein Thread eine Variable liest, 
-	diese Verändert aber bevor er diese wieder in den Speicher schreiben kann ein anderer Thread die Varaible 
-	liest und mit dem alten noch nicht akutalisierten Wert weiterrechnet. 
-	Dadurch verhält sich das Programm in Anwesenheit von mehreren Threads nicht mehr wie erwartet korrekt.
+	Safety Hazards 
+	Wenn mehrere Threads gleichzeitig auf den selben Speicherplatz zugreifen ohne synchronisiert zu sein,
+	kann es dazu führen, dass das Resultat unvorhersehbar wird. 
 	*/
 	
-}	
-class HazardThread extends Thread{
-	public int buchung;
+	public int addition;
 	
-	HazardThread(int buchung){
-		this.buchung = buchung;
+	SafetyHazard(int addition){
+		this.addition = addition;
 	}
 	
 	@Override
 	public void run(){
-		int speicher = kontostand;
-		speicher += this.buchung;
+		int speicher = zahl;
+		speicher += addition;
 		try {
-			this.wait(20);
+			Thread.sleep(50);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		kontostand = speicher;
-	}
+		zahl = speicher;
+	}	
 }
-
- 
