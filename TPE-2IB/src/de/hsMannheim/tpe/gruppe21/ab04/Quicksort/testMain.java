@@ -4,31 +4,30 @@ public class testMain {
 
 	public static void main(String[] args) {
 		//sequentiell
-		Integer[] array1 = {2,4,2,34,5,64,5, 3,24,54,354,243,234,52,324,234,64,76,86,7,78,98,8,54,35,54,6765,354,2,54};
-		//System.out.println("Before sequentiel sort: ");
-		//System.out.println(printArray(array1));
+		Integer[] array1 = {1,0,25,-5,10,0,30,4,20,23,50,10,-5};
+		System.out.println("BEFORE SEQUENTIELL SORT: ");
+		System.out.println(printArray(array1));
 		
 		long timeSeq = System.currentTimeMillis();
 		QuicksortSequentiell sequentiellSorter = new QuicksortSequentiell();
 		sequentiellSorter.sort(array1);
 		timeSeq = System.currentTimeMillis() - timeSeq;
 		
-		//System.out.println("After sequentiell sort: ");
-		//System.out.println(printArray(array1));
-		
+		System.out.println("AFTER SEQUENTIELL SORT: ");
+		System.out.println(printArray(array1));
 		
 		//parallel
-		//System.out.println(" \nBefore parallel sort: ");
-		Integer[] array2 = {2,4,2,34,5,64,5, 3,24,54,354,243,234,52,324,234,64,76,86,7,78,98,8,54,35,54,6765,354,2,54};
-		//System.out.println(printArray(array2));
+		System.out.println(" \nBEFORE PARALLEL SORT: ");
+		Integer[] array2 = {1,0,25,-5,10,0,30,4,20,23,50,10,-5};
+		System.out.println(printArray(array2));
 		
 		long timePar = System.currentTimeMillis();
 		QuicksortParallel parallelSorter = new QuicksortParallel();
 		parallelSorter.sort(array2);
 		timePar = System.currentTimeMillis() - timePar;
 		
-		//System.out.println("After parallel sort: ");
-		//System.out.println(printArray(array2));
+		System.out.println("AFTER PARALLEL SORT: ");
+		System.out.println(printArray(array2) + "\n");
 		
 		if(!isSorted(array1)){
 			System.out.println("Array 1 nicht sortiert!");
