@@ -4,9 +4,18 @@ public class QuicksortSequentiell implements SortAlgorithm {
 	@Override
 	public void sort(Comparable[] array) {
 		quicksortSeq(array, 0, array.length-1);
-
 	}
-
+	private int rekursionsSchritte = 0;
+	private int swaps = 0;
+	private int compares = 0;
+	
+	public void printNumbers(){
+		System.out.println("Sequentiell:");
+		System.out.println("\tRekursionsSchritte: " + rekursionsSchritte);
+		System.out.println("\tVertuschungen: " + swaps);
+		System.out.println("\tVergleiche: " + compares);
+	}
+	
 	/**
 	 * sorts array with quicksort recursively
 	 * @param array array to sort
@@ -15,6 +24,7 @@ public class QuicksortSequentiell implements SortAlgorithm {
 	 */
 	private void quicksortSeq(Comparable[] array, int low, int up){
 		if(low < up){
+			rekursionsSchritte += 2;
 			int p = findPiv(array, low, up);
 			quicksortSeq(array, low, p);
 			quicksortSeq(array, p + 1, up);
@@ -36,11 +46,13 @@ public class QuicksortSequentiell implements SortAlgorithm {
 			//left: Index of the first element from position low with array[left]>= piv
 			int left = low;
 			while(array[left].compareTo(piv) < 0){
+				compares++;
 				left++;
 			}
 			//right: Index of the first element from position up with array[right]<= piv
 			int right = up;
 			while(array[right].compareTo(piv) > 0){
+				compares++;
 				right--;
 			}
 			if(left < right){
@@ -63,6 +75,7 @@ public class QuicksortSequentiell implements SortAlgorithm {
 	 * @param toSwapTwo second element to swap
 	 */
 	private void swap(Comparable[] array, int toSwapOne, int toSwapTwo){
+		swaps++;
 		Comparable storage = array[toSwapOne];
 		array[toSwapOne] = array[toSwapTwo];
 		array[toSwapTwo] = storage;

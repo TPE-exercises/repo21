@@ -11,6 +11,18 @@ public class QuicksortParallel implements SortAlgorithm {
 		} catch (InterruptedException e) {e.printStackTrace();}
 	}
 	
+	private int rekursionsSchritte = 0;
+	private int swaps = 0;
+	private int compares = 0;
+	private int threads = 1;
+	
+	public void printNumbers(){
+		System.out.println("\n \nParallel:");
+		System.out.println("\tRekursionsSchritte: " + rekursionsSchritte);
+		System.out.println("\tVertuschungen: " + swaps);
+		System.out.println("\tVergleiche: " + compares);
+		System.out.println("\tThreads: " + threads);
+	}
 	
 	/**
 	 * creates new Threads for every quicksort recursion
@@ -40,6 +52,8 @@ public class QuicksortParallel implements SortAlgorithm {
 	 */
 	private void quickSortPar(Comparable[] array, int low, int up) throws InterruptedException {
 		if(low < up){
+			rekursionsSchritte += 2;
+			threads += 2;
 			int p = findPiv(array, low, up);
 			Thread leftHalf = newQuickSortThread(array, low, p);
 			Thread rightHalf = newQuickSortThread(array, p+1, up);
@@ -68,11 +82,13 @@ public class QuicksortParallel implements SortAlgorithm {
 			//left: Index of the first element from position low with array[left]>= piv
 			int left = low;
 			while(array[left].compareTo(piv) < 0){
+				compares++;
 				left++;
 			}
 			//right: Index of the first element from position up with array[right]<= piv
 			int right = up;
 			while(array[right].compareTo(piv) > 0){
+				compares++;
 				right--;
 			}
 			if(left < right){
@@ -95,6 +111,7 @@ public class QuicksortParallel implements SortAlgorithm {
 	 * @param toSwapTwo second element to swap
 	 */
 	private void swap(Comparable[] array, int toSwapOne, int toSwapTwo){
+		swaps++;
 		Comparable storage = array[toSwapOne];
 		array[toSwapOne] = array[toSwapTwo];
 		array[toSwapTwo] = storage;
