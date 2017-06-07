@@ -32,14 +32,14 @@ public class QuicksortParallel implements SortAlgorithm {
 	 * @return thread that quicksorts the array
 	 */
 	private Thread newQuickSortThread(Comparable[] array, int low, int up){
-		Thread quickSortThread = new Thread(new Runnable(){
+		Thread quickSortThread = new Thread(){
 			@Override
 			public void run() {
 				try {
 					quickSortPar(array, low, up);
 				} catch (InterruptedException e) {e.printStackTrace();}
 			}
-		});
+		};
 		return quickSortThread;
 	}
 
