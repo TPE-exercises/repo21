@@ -11,6 +11,7 @@ public class QuicksortParallel implements SortAlgorithm {
 		} catch (InterruptedException e) {e.printStackTrace();}
 	}
 	
+	
 	/**
 	 * creates new Threads for every quicksort recursion
 	 * @param array to sort array

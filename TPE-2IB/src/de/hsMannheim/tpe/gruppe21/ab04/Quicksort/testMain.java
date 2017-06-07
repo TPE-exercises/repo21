@@ -15,7 +15,6 @@ public class testMain {
 		System.out.println(printArray(array1));
 		
 		
-		
 		//parallel
 		System.out.println(" \nBefore parallel sort: ");
 		Integer[] array2 = {2,4,2,34,5,64,5};

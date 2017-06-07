@@ -55,6 +55,7 @@ public class QuicksortSequentiell implements SortAlgorithm {
 		return up;
 	}
 	
+	
 	/**
 	 * swaps two elements of an array
 	 * @param array where elements to swap
