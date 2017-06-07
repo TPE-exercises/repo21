@@ -48,6 +48,9 @@ public class QuicksortSequentiell implements SortAlgorithm {
 				low = left +1;
 				up = right -1;
 			}
+			else{
+				return right;
+			}
 		}
 		return up;
 	}
@@ -58,10 +61,10 @@ public class QuicksortSequentiell implements SortAlgorithm {
 	 * @param toSwapOne first element to swap
 	 * @param toSwapTwo second element to swap
 	 */
-	private void swap(Comparable[] array, Comparable toSwapOne, Comparable toSwapTwo){
-		Comparable storage = toSwapOne;
-		toSwapOne = toSwapTwo;
-		toSwapTwo = storage;
+	private void swap(Comparable[] array, int toSwapOne, int toSwapTwo){
+		Comparable storage = array[toSwapOne];
+		array[toSwapOne] = array[toSwapTwo];
+		array[toSwapTwo] = storage;
 	}
 	
 }

@@ -4,7 +4,11 @@ public class QuicksortParallel implements SortAlgorithm {
 
 	@Override
 	public void sort(Comparable[] array) {
-		newQuickSortThread(array, 0, array.length-1);
+		Thread startSorter = newQuickSortThread(array, 0, array.length-1);
+		startSorter.start();
+		try {
+			startSorter.join();
+		} catch (InterruptedException e) {e.printStackTrace();}
 	}
 	
 	/**
@@ -75,6 +79,9 @@ public class QuicksortParallel implements SortAlgorithm {
 				low = left +1;
 				up = right -1;
 			}
+			else{
+				return right;
+			}
 		}
 		return up;
 	}
@@ -86,9 +93,9 @@ public class QuicksortParallel implements SortAlgorithm {
 	 * @param toSwapOne first element to swap
 	 * @param toSwapTwo second element to swap
 	 */
-	private void swap(Comparable[] array, Comparable toSwapOne, Comparable toSwapTwo){
-		Comparable storage = toSwapOne;
-		toSwapOne = toSwapTwo;
-		toSwapTwo = storage;
+	private void swap(Comparable[] array, int toSwapOne, int toSwapTwo){
+		Comparable storage = array[toSwapOne];
+		array[toSwapOne] = array[toSwapTwo];
+		array[toSwapTwo] = storage;
 	}
 }
