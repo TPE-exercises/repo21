@@ -28,6 +28,26 @@ public class QuicksortTest {
 		assertTrue(isSorted(array));
 	}
 	
+	@Test
+	public void quickSortSequenzTestEmptyArray() {
+		Integer[] array = {};
+		
+		SortAlgorithm qs = new QuicksortSequentiell();
+		qs.sort(array);
+		
+		assertTrue(isSorted(array));
+	}
+	
+	@Test
+	public void quickSortParallelTestEmptyArray() {
+		Integer[] array = {};
+		
+		SortAlgorithm qs = new QuicksortParallel();
+		qs.sort(array);
+		
+		assertTrue(isSorted(array));
+	}
+	
 	public static boolean isSorted(Comparable[] array){
 		for(int i = 0; i < array.length-1; i++){
 			if(array[i].compareTo(array[i+1]) > 0){
