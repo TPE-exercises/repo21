@@ -39,7 +39,7 @@ public class testMain {
 				time = (int)System.currentTimeMillis();
 				qp.sort(mainArray);
 				time = (int)System.currentTimeMillis() - time;
-				printNumbers(qs.getNumbers(), time);
+				printNumbers(qp.getNumbers(), time);
 				break;
 			case "4":
 				Integer[] newMain = {};
