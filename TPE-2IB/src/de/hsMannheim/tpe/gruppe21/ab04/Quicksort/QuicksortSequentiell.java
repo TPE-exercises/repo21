@@ -9,13 +9,10 @@ public class QuicksortSequentiell implements SortAlgorithm {
 	private int swaps = 0;
 	private int compares = 0;
 	
-	public void printNumbers(){
-		System.out.println("Sequentiell:");
-		System.out.println("\tRekursionsSchritte: " + rekursionsSchritte);
-		System.out.println("\tVertuschungen: " + swaps);
-		System.out.println("\tVergleiche: " + compares);
+	public int[] getNumbers(){
+		int[] nmbrs = {rekursionsSchritte, swaps, compares, 0};
+		return nmbrs;
 	}
-	
 	/**
 	 * sorts array with quicksort recursively
 	 * @param array array to sort

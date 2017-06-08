@@ -16,12 +16,9 @@ public class QuicksortParallel implements SortAlgorithm {
 	private int compares = 0;
 	private int threads = 1;
 	
-	public void printNumbers(){
-		System.out.println("\nParallel:");
-		System.out.println("\tRekursionsSchritte: " + rekursionsSchritte);
-		System.out.println("\tVertuschungen: " + swaps);
-		System.out.println("\tVergleiche: " + compares);
-		System.out.println("\tThreads: " + threads);
+	public int[] getNumbers(){
+		int[] nmbrs = {rekursionsSchritte, swaps, compares, threads};
+		return nmbrs;
 	}
 	
 	/**

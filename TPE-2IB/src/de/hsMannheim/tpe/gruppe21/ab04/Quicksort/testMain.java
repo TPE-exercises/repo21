@@ -1,52 +1,65 @@
 package de.hsMannheim.tpe.gruppe21.ab04.Quicksort;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class testMain {
 
-	public static void main(String[] args) {
-		//sequentiell
-		Integer[] array1 = {1,0,25,-5,10,0,30,4,20,23,50,10,-5};
-		System.out.println("BEFORE SEQUENTIELL SORT: ");
-		System.out.println(printArray(array1));
-		
-		long timeSeq = System.currentTimeMillis();
-		QuicksortSequentiell sequentiellSorter = new QuicksortSequentiell();
-		sequentiellSorter.sort(array1);
-		timeSeq = System.currentTimeMillis() - timeSeq;
-		
-		System.out.println("AFTER SEQUENTIELL SORT: ");
-		System.out.println(printArray(array1));
-		
-		//parallel
-		System.out.println(" \nBEFORE PARALLEL SORT: ");
-		Integer[] array2 = {1,0,25,-5,10,0,30,4,20,23,50,10,-5};
-		System.out.println(printArray(array2));
-		
-		long timePar = System.currentTimeMillis();
-		QuicksortParallel parallelSorter = new QuicksortParallel();
-		parallelSorter.sort(array2);
-		timePar = System.currentTimeMillis() - timePar;
-		
-		System.out.println("AFTER PARALLEL SORT: ");
-		System.out.println(printArray(array2) + "\n");
-		
-		if(!isSorted(array1)){
-			System.out.println("Array 1 nicht sortiert!");
+	public static void main(String[] args) throws IOException {
+		while(true){
+			System.out.println("Your Array: ");
+			System.out.println(printArray(mainArray));
+			System.out.println("Press 1:  enter comparable in array");
+			System.out.println("Press 2:  sort with sequentiell quicksort");
+			System.out.println("Press 3:  sort with parallel quicksort");
+			System.out.println("Press 4:  clear Array");
+			System.out.println("Press 10: stop");
+			
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			String inputMenu = br.readLine();
+			int time = 0;
+			
+			switch(inputMenu){
+			case "1": 
+				mainArray = extendArray(mainArray);
+				System.out.println("to insert:");
+				int inputNumber = Integer.parseInt(br.readLine());
+				mainArray[mainArray.length-1] = inputNumber;
+				break;
+			case "2":
+				QuicksortSequentiell qs = new QuicksortSequentiell();
+				time = (int)System.currentTimeMillis();
+				qs.sort(mainArray);
+				time = (int)System.currentTimeMillis() - time;
+				printNumbers(qs.getNumbers(), time);
+				break;
+			case "3":
+				QuicksortParallel qp = new QuicksortParallel();
+				time = (int)System.currentTimeMillis();
+				qp.sort(mainArray);
+				time = (int)System.currentTimeMillis() - time;
+				printNumbers(qs.getNumbers(), time);
+				break;
+			case "4":
+				Integer[] newMain = {};
+				mainArray = newMain;
+				break;
+			case "10":
+				System.exit(0);
+				break;
+			default:
+				System.out.println("Falsche Eingabe, bitte versuchen sie es erneut.");		
+			}
 		}
-		if(!isSorted(array2)){
-			System.out.println("Array 2 nicht sortiert!");
-		}
-		
-		sequentiellSorter.printNumbers();
-		System.out.println("\tZeit: " + timeSeq + "ms");
-		parallelSorter.printNumbers();
-		System.out.println("\tZeit: " + timePar + "ms");
-		
 	}
+	
+	private static Integer[] mainArray = {};
 	
 	public static String printArray(Comparable[] array){
 		String toPrint = "";
 		for(int i = 0; i < array.length; i++){
-			toPrint += array[i].toString() + "; ";
+			toPrint += array[i].toString() + ", ";
 		}
 		return toPrint;
 	}
@@ -58,5 +71,21 @@ public class testMain {
 			}
 		}
 		return true;
+	}
+
+	public static void printNumbers(int[] numbers, int time){
+		System.out.println("Zeit: " + time + "ms");
+		System.out.println("Rekursions Schritte: " + numbers[0]);
+		System.out.println("Vertauschungen: " + numbers[1]);
+		System.out.println("Vergleiche: " + numbers[2]);
+		System.out.println("Threads: " + numbers[3]);
+	}
+	
+	private static Integer[] extendArray(Integer[] array){
+		Integer[] newArray = new Integer[array.length+1];
+		for(int i = 0; i < array.length; i++){
+			newArray[i] = array[i];
+		}
+		return newArray;
 	}
 }
