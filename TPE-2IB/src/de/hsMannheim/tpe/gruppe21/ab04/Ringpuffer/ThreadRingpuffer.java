@@ -1,6 +1,6 @@
 package de.hsMannheim.tpe.gruppe21.ab04.Ringpuffer;
 
-public class ThreadRingpuffer extends Ringpuffer{
+public class ThreadRingpuffer extends Ringpuffer {
 	
 	ThreadRingpuffer(int size) {
 		super(size);

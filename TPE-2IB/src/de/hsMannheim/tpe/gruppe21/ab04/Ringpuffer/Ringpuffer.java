@@ -2,7 +2,6 @@ package de.hsMannheim.tpe.gruppe21.ab04.Ringpuffer;
 
 public class Ringpuffer {
 	private Object[] values;
-	private int exceptionFlag = 0;
 	private int inPointer;
 	private int outPointer;
 
@@ -32,6 +31,10 @@ public class Ringpuffer {
 		if (this.isEmpty()) {
 			throw new UnderflowException("Ringbuffer is empty");
 		} else {
+			
+			System.out.println("Out Pointer : " + this.outPointer);
+			System.out.println("Out Pointer Object: "+ values[outPointer]);
+			
 			Object ret = this.values[this.outPointer];
 			this.outPointer++;
 			if(this.outPointer>= this.values.length){

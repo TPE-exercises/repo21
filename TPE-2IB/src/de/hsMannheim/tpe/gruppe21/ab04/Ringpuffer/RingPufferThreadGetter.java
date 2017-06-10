@@ -16,7 +16,13 @@ public class RingPufferThreadGetter extends Thread{
 				sleep(delay);
 			} catch (InterruptedException e2) {interrupt();}
 			try {
-				System.out.println("ActualNumber: " + ringpuffer.get());
+				if(!ringpuffer.isEmpty()){
+					int element = (int)ringpuffer.get();
+					System.out.println("ActualNumber: " + element);
+				}	
+				else{
+					throw new UnderflowException("");
+				}
 			} catch (UnderflowException e) {
 				try {
 					sleep(50);
