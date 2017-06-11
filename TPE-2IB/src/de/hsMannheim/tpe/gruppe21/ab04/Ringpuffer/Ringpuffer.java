@@ -11,7 +11,7 @@ public class Ringpuffer {
 		this.outPointer = 0;
 	}
 	
-	public void put(Object element) throws OverflowException {
+	public synchronized void enter(Object element) throws OverflowException {
 		if(inPointer >= this.values.length){
 			throw new OverflowException("inPointer ist übergelaufen", element);
 		}
@@ -27,13 +27,10 @@ public class Ringpuffer {
 		} 
 	}
 
-	public Object get() throws UnderflowException {
+	public synchronized Object leafe() throws UnderflowException {
 		if (this.isEmpty()) {
 			throw new UnderflowException("Ringbuffer is empty");
 		} else {
-			
-			System.out.println("Out Pointer : " + this.outPointer);
-			System.out.println("Out Pointer Object: "+ values[outPointer]);
 			
 			Object ret = this.values[this.outPointer];
 			this.outPointer++;
@@ -51,6 +48,15 @@ public class Ringpuffer {
 	public boolean isEmpty() {
 		for(int i = 0; i < this.values.length; i++){
 			if(this.values[i] != null){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean isFull(){
+		for(int i = 0; i< values.length; i++){
+			if(values[i] == null){
 				return false;
 			}
 		}

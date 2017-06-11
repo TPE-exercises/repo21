@@ -3,7 +3,7 @@ package de.hsMannheim.tpe.gruppe21.ab04.Ringpuffer;
 public class RingPufferThreadGetter extends Thread{
 	
 	private ThreadRingpuffer ringpuffer;
-	private long delay = 30;
+	private static final long DELAY = 100;
 	
 	RingPufferThreadGetter(ThreadRingpuffer ringpuffer){
 		this.ringpuffer = ringpuffer;
@@ -11,24 +11,28 @@ public class RingPufferThreadGetter extends Thread{
 	
 	@Override
 	public void run(){
-		while(!isInterrupted()){		
+		while(!isInterrupted()){
 			try {
-				sleep(delay);
-			} catch (InterruptedException e2) {interrupt();}
-			try {
-				if(!ringpuffer.isEmpty()){
-					int element = (int)ringpuffer.get();
-					System.out.println("ActualNumber: " + element);
-				}	
-				else{
-					throw new UnderflowException("");
-				}
-			} catch (UnderflowException e) {
-				try {
-					sleep(50);
-				} catch (InterruptedException e1) {interrupt();}
-				this.run();
+				sleep(DELAY);
+			} catch (InterruptedException e) {
+				System.out.println("Finished "+ this.getName());
+				return;
 			}
+			get();
+		}	
+		System.out.println("Finished "+ this.getName());
+	}
+	
+	public synchronized void get(){
+		if(ringpuffer.isEmpty()){
+			try {
+				wait();
+			} catch (InterruptedException e) {return;}
 		}
+		try {
+			int output = (int) ringpuffer.get();
+			System.out.println("" + this.getName() + " holte: " + output);
+		} catch (InterruptedException e) {get();}
+		notifyAll();
 	}
 }

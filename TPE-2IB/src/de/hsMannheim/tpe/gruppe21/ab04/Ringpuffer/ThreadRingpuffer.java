@@ -6,13 +6,25 @@ public class ThreadRingpuffer extends Ringpuffer {
 		super(size);
 	}
 	
-	@Override
-	public synchronized void put(Object element) throws OverflowException{
-		super.put(element);
+	public synchronized void put(Object element) throws InterruptedException{
+		if(this.isFull()){
+			wait();
+		}
+		try {
+			this.enter(element);
+		} catch (OverflowException e) {	e.printStackTrace();} 
+		notifyAll();
 	}
 	
-	@Override
-	public synchronized Object get() throws UnderflowException{
-		return super.get();
+	public synchronized Object get() throws InterruptedException{
+		while(this.isEmpty()){
+			wait();
+		}
+		try {
+			return this.leafe();
+		} catch (UnderflowException e) {e.printStackTrace();}
+		return null;		
 	}
+	
+	
 }

@@ -2,19 +2,16 @@ package de.hsMannheim.tpe.gruppe21.ab04.Ringpuffer;
 
 public class TimerThread extends Thread{
 
-	private long delay;
+	private static final long TIMEDELAY = 2000;
 	public boolean interuptAll = false;
-	
-	TimerThread(long delay){
-		this.delay = delay;
-	}
 	
 	@Override
 	public void run(){
 		try {
-			sleep(delay);
-		} catch (InterruptedException e) {e.printStackTrace();}
+			sleep(TIMEDELAY);
+		} catch (InterruptedException e) {return;}
 		interuptAll = true;
+		System.out.println("Zeit ist um");
 	}
 	
 }

@@ -3,7 +3,7 @@ package de.hsMannheim.tpe.gruppe21.ab04.Ringpuffer;
 public class RingpufferMain {
 
 	public static void main(String[] args) throws InterruptedException {
-		TimerThread timer = new TimerThread(5000);
+		TimerThread timer = new TimerThread();
 		
 		ThreadRingpuffer ringpuffer = new ThreadRingpuffer(20);
 		
@@ -15,6 +15,13 @@ public class RingpufferMain {
 		RingPufferThreadGetter verbraucherZwei = new RingPufferThreadGetter(ringpuffer);	
 		
 		timer.start();
+		
+		erzeugerEins.setName("putterEins");
+		erzeugerZwei.setName("putterZwei");
+		erzeugerDrei.setName("putterDrei");
+		verbraucherEins.setName("getterEins");
+		verbraucherZwei.setName("getterZwei");
+		
 		erzeugerEins.start();
 		erzeugerZwei.start();
 		erzeugerDrei.start();
