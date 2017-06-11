@@ -30,7 +30,7 @@ public class RingpufferMain {
 		
 		timer.join();
 		
-		if(timer.interuptAll){
+		if(timer.interruptAll){
 			erzeugerEins.interrupt();
 			erzeugerZwei.interrupt();
 			erzeugerDrei.interrupt();

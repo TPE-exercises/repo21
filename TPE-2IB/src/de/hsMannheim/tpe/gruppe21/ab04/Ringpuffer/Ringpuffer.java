@@ -11,6 +11,11 @@ public class Ringpuffer {
 		this.outPointer = 0;
 	}
 	
+	/**
+	 * enters element in ringbuffer
+	 * @param element object zu enter
+	 * @throws OverflowException if ringbuffer is full
+	 */
 	public synchronized void enter(Object element) throws OverflowException {
 		if(inPointer >= this.values.length){
 			throw new OverflowException("inPointer ist übergelaufen", element);
@@ -27,6 +32,11 @@ public class Ringpuffer {
 		} 
 	}
 
+	/**
+	 * one Object leafes thr ringbuffer
+	 * @return the object that leafes
+	 * @throws UnderflowException if ringbuffer is empty
+	 */
 	public synchronized Object leafe() throws UnderflowException {
 		if (this.isEmpty()) {
 			throw new UnderflowException("Ringbuffer is empty");
@@ -41,10 +51,16 @@ public class Ringpuffer {
 		}
 	}
 
+	/**
+	 * @return front element
+	 */
 	public Object front(){
 		return values[outPointer]; 
 	}
 	
+	/**
+	 * @return true if ringbuffer is empty
+	 */
 	public boolean isEmpty() {
 		for(int i = 0; i < this.values.length; i++){
 			if(this.values[i] != null){
@@ -54,6 +70,9 @@ public class Ringpuffer {
 		return true;
 	}
 	
+	/**
+	 * @return true if ringbuffer is full
+	 */
 	public boolean isFull(){
 		for(int i = 0; i< values.length; i++){
 			if(values[i] == null){
@@ -63,6 +82,9 @@ public class Ringpuffer {
 		return true;
 	}
 
+	/**
+	 * @return size of ringbuffer
+	 */
 	public int size() {
 		int size = 0;
 		for(int i = 0; i < values.length; i++){

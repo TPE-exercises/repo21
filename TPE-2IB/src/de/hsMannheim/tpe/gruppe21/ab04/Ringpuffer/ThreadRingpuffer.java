@@ -6,20 +6,25 @@ public class ThreadRingpuffer extends Ringpuffer {
 		super(size);
 	}
 	
+	/**
+	 * synchronized version of enter
+	 * @param element object zu enter
+	 * @throws OverflowException if ringbuffer is full
+	 */
 	public synchronized void put(Object element) throws InterruptedException{
-		if(this.isFull()){
-			wait();
-		}
 		try {
 			this.enter(element);
-		} catch (OverflowException e) {	e.printStackTrace();} 
+		} catch (OverflowException e) {e.printStackTrace();} 
 		notifyAll();
 	}
 	
+	/**
+	 * synchronized version of leafe
+	 * @return the object that leafes
+	 * @throws UnderflowException if ringbuffer is empty
+	 */
 	public synchronized Object get() throws InterruptedException{
-		while(this.isEmpty()){
-			wait();
-		}
+		notifyAll();
 		try {
 			return this.leafe();
 		} catch (UnderflowException e) {e.printStackTrace();}

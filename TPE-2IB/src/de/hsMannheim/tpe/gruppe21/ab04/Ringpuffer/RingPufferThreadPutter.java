@@ -6,13 +6,16 @@ public class RingPufferThreadPutter extends Thread{
 
 	private ThreadRingpuffer ringpuffer;
 	private Random generator;
-	private static final long DELAY = 10;
+	private static final long DELAY = 5;
 	
 	RingPufferThreadPutter(ThreadRingpuffer ringpuffer, long seed){
 		this.ringpuffer = ringpuffer;
 		this.generator = new Random(seed);
 	}
-	
+
+	/**
+	 * sleeps and puts elements in the ringbuffer till time is over
+	 */
 	@Override
 	public void run(){
 		while(!isInterrupted()){
@@ -28,6 +31,10 @@ public class RingPufferThreadPutter extends Thread{
 		System.out.println("Finished "+ this.getName());
 	}
 	
+	/**
+	 * puts the element in the ringbuffer
+	 * @param input to input
+	 */
 	public synchronized void put(int input){
 		if(isInterrupted()){
 			System.out.println("Interrupted");

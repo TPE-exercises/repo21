@@ -9,6 +9,9 @@ public class RingPufferThreadGetter extends Thread{
 		this.ringpuffer = ringpuffer;
 	}
 	
+	/**
+	 * sleeps and gets elements out of the ringbuffer till time is over
+	 */
 	@Override
 	public void run(){
 		while(!isInterrupted()){
@@ -23,6 +26,9 @@ public class RingPufferThreadGetter extends Thread{
 		System.out.println("Finished "+ this.getName());
 	}
 	
+	/**
+	 * prints a object of ringbuffer in console out
+	 */
 	public synchronized void get(){
 		if(ringpuffer.isEmpty()){
 			try {
