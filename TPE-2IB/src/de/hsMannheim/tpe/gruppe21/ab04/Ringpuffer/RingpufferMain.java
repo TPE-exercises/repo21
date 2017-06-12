@@ -2,7 +2,7 @@ package de.hsMannheim.tpe.gruppe21.ab04.Ringpuffer;
 
 public class RingpufferMain {
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException {	
 		TimerThread timer = new TimerThread();
 		
 		ThreadRingpuffer ringpuffer = new ThreadRingpuffer(20);
