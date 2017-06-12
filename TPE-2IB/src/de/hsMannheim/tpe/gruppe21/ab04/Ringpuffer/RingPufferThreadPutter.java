@@ -19,14 +19,14 @@ public class RingPufferThreadPutter extends Thread{
 	@Override
 	public void run(){
 		while(!isInterrupted()){
+			int input = generator.nextInt();
+			put(input);
 			try {
 				sleep(DELAY);
 			} catch (InterruptedException e) {
 				System.out.println("Finished "+ this.getName());
 				return;
 			}
-			int input = generator.nextInt();
-			put(input);
 		}	
 		System.out.println("Finished "+ this.getName());
 	}
@@ -44,11 +44,8 @@ public class RingPufferThreadPutter extends Thread{
 				wait();
 			} catch (InterruptedException e) {return;}
 		}
-		try {
-			ringpuffer.enter(input);
-		} catch (OverflowException e) {
-			put(input);
-		}
+		ringpuffer.enter(input);
+		System.out.println(this.getName() + " schreibt: " + input );
 		notifyAll();
 	}
 }

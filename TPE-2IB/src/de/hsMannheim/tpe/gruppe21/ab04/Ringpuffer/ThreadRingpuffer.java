@@ -12,9 +12,7 @@ public class ThreadRingpuffer extends Ringpuffer {
 	 * @throws OverflowException if ringbuffer is full
 	 */
 	public synchronized void put(Object element) throws InterruptedException{
-		try {
-			this.enter(element);
-		} catch (OverflowException e) {e.printStackTrace();} 
+		this.enter(element); 
 		notifyAll();
 	}
 	
@@ -24,12 +22,12 @@ public class ThreadRingpuffer extends Ringpuffer {
 	 * @throws UnderflowException if ringbuffer is empty
 	 */
 	public synchronized Object get() throws InterruptedException{
-		notifyAll();
+		Object ret = null;
 		try {
-			return this.leafe();
+			ret = this.leafe();
 		} catch (UnderflowException e) {e.printStackTrace();}
-		return null;		
-	}
-	
+		notifyAll();
+		return ret;		
+	}	
 	
 }
