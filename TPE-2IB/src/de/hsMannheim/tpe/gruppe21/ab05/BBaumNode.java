@@ -302,6 +302,19 @@ public class BBaumNode {
 
 		return null;
 	}
+	
+	
+	//TDOD: add All um delet in BTree zu vollenden
+	public BBaumNode addAll(BBaumNode origin){
+		for (int i = 0; i < pointer.length; i++) {
+			if (pointer[i] != null) {
+				pointer[i].printInorder();
+			}
+			if (i < values.length && values[i] != null) {
+				print(values[i] + " ");
+			}
+		}
+	}
 
 	/**
 	 * @return level of node
@@ -378,9 +391,16 @@ public class BBaumNode {
 
 	
 	public boolean delete(Comparable o) {
-		
-		
-		
+		for (int i = 0; i < values.length; i++) {
+			if (values[i] != null && o.compareTo(values[i]) == 0) {
+				values[i] = null;
+				return true;
+			} else if (values[i] == null || o.compareTo(values[i]) < 0|| i == values.length - 1) {
+				if (pointer[i] != null) {
+					return pointer[i].delete(o);
+				}
+			}
+		}		
 		return false;
 	}
 }
