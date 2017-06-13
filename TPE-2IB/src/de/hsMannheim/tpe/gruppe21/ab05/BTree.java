@@ -58,7 +58,10 @@ public class BTree implements BBaum {
 		if(this.contains(o)){
 			boolean ret = wurzel.delete(o);
 			BTree deletedBTree = new BTree(this.ordnung);
-			
+			this.wurzel.delete(o);
+			deletedBTree.addAll(wurzel);
+			this.wurzel = deletedBTree.wurzel;
+			return ret;
 		}
 		return false;
 	}

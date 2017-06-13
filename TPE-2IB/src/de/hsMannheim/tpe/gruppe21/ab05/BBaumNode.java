@@ -302,19 +302,7 @@ public class BBaumNode {
 
 		return null;
 	}
-	
-	
-	//TDOD: add All um delet in BTree zu vollenden
-	public BBaumNode addAll(BBaumNode origin){
-		for (int i = 0; i < pointer.length; i++) {
-			if (pointer[i] != null) {
-				pointer[i].printInorder();
-			}
-			if (i < values.length && values[i] != null) {
-				print(values[i] + " ");
-			}
-		}
-	}
+
 
 	/**
 	 * @return level of node
