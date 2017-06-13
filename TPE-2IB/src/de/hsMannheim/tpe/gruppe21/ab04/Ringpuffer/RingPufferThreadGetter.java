@@ -39,6 +39,7 @@ public class RingPufferThreadGetter extends Thread{
 			int output = (int) ringpuffer.get();
 			System.out.println("" + this.getName() + " holte: " + output);
 		} catch (InterruptedException e) {get();}
-		notifyAll();
 	}
+	
+	
 }
