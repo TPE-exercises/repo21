@@ -4,11 +4,9 @@ import static gdi.MakeItSimple.*;
 
 public class BTree implements BBaum {
 	
-	//Attribute
 	private int ordnung;
 	private BBaumNode wurzel;
 	
-	//Konstruktoren
 	BTree(int ordnung){
 		this.ordnung = ordnung;
 		wurzel = new BBaumNode(ordnung);
@@ -20,16 +18,11 @@ public class BTree implements BBaum {
 			throw new GDIException("Datei konnte nicht eingelesen werden");
 	}
 	
-	
-	//Methoden
 	public BBaumNode getWurzel(){
 		return wurzel;
 	}
 	
-	/**
-	 * @param o Integer to insert in BTree
-	 * @return True if it worked, false if doesnt
-	 */
+	@Override
 	public boolean insert(Comparable o) {
 		Comparable ins = o;
 		if(contains(ins)){
@@ -44,10 +37,7 @@ public class BTree implements BBaum {
 		return temp;
 	}
 		
-	/**
-	 * @param filename File to get inserted
-	 * @return true if everythin was succesfull, else false
-	 */
+	@Override
 	public boolean insert(String filename) {
 		Object file = openInputFile(filename);
 		boolean temp = true;
@@ -58,25 +48,25 @@ public class BTree implements BBaum {
 		return temp;
 	}
 
-	/**
-	 * @param o Integer to search
-	 * @return true, if o is in the Tree, else false
-	 */
+	@Override
 	public boolean contains(Comparable o) {
-		Comparable ins = o;
-		return wurzel.contains(ins);
+		return wurzel.contains(o);
 	}
 
-	/**
-	 * @return amount of values in Tree
-	 */
+	@Override
+	public boolean delete(Comparable o) {
+		if(this.contains(o)){
+			return wurzel.delete(o);
+		}
+		return false;
+	}
+	
+	@Override
 	public int size() {
 		return wurzel.getSize();
 	}
 
-	/**
-	 * @return height of Tree
-	 */
+	@Override
 	public int height() {
 		if(isEmpty()){
 			return 0;
@@ -85,23 +75,17 @@ public class BTree implements BBaum {
 			return wurzel.height();
 	}
 
-	/**
-	 * @return max Value of Tree
-	 */
+	@Override
 	public Comparable getMax() {
 		return wurzel.getMax();
 	}
 
-	/**
-	 * @return min Value of Tree
-	 */
+	@Override
 	public Comparable getMin() {
 		return wurzel.getMin();
 	}
 
-	/**
-	 * @return true, if Tree is empty, else false
-	 */
+	@Override
 	public boolean isEmpty() {
 		if(wurzel == null || wurzel.getValues()[0]==null){
 			return true;
@@ -111,13 +95,11 @@ public class BTree implements BBaum {
 		}
 	}
 
-	/**
-	 * like printInorder, but instead of printing, it adds the values to this tree
-	 * @param otherTree inserts everything of other tree
-	 */
+	@Override
 	public void addAll(BTree otherTree) {
 		addAll(otherTree.wurzel);
 	}
+	
 	/**
 	 * adds every value of otherTree to this
 	 * @param otherNode to get insert
@@ -131,48 +113,35 @@ public class BTree implements BBaum {
 				insert(otherNode.getValues()[i]);
 			}
 		}
-		
 	}
 
-	/**
-	 * prints Tree Inorder	
-	 */
+	@Override
 	public void printInorder() {
 		println("Inorder: ");
 		wurzel.printInorder();
 		println();
 	}
 
-	/**
-	 * prints Tree Postorder	
-	 */
+	@Override
 	public void printPostorder() {
 		println("Postorder: ");
 		wurzel.printPostorder();
 		println();
 	}
 
-	/**
-	 * prints Tree Preorder	
-	 * 
-	 */
+	@Override
 	public void printPreorder() {
 		println("Preorder: ");
 		wurzel.printPreorder();
 		println();	
 	}
 
-	/**
-	 * prints Tree Levelorder	
-	 */
+	@Override
 	public void printLevelorder() {
 		println("Levelorder: ");
 		wurzel.printLevelorder();
 		println();
 	}
-
-
-
 }
 
 

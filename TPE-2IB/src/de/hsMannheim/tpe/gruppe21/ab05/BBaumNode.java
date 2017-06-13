@@ -3,13 +3,13 @@ package de.hsMannheim.tpe.gruppe21.ab05;
 import static gdi.MakeItSimple.*;
 
 public class BBaumNode {
-	// Attribute
+
 	private int maxValues;
 	private Comparable[] values;
 	private BBaumNode[] pointer;
 	private BBaumNode parent = null;
 
-	// Konstruktor
+	
 	BBaumNode(int ordnung) {
 		maxValues = ordnung * 2;
 		// one more than necessary, to make burst "easy"
@@ -22,7 +22,6 @@ public class BBaumNode {
 		this.parent = parent;
 	}
 
-	// getter, setter
 	public Comparable[] getValues() {
 		return values;
 	}
@@ -33,7 +32,6 @@ public class BBaumNode {
 
 	
 	/**
-	 * 
 	 * @return amount of values in nodes
 	 */
 	public int getSize() {
@@ -126,7 +124,6 @@ public class BBaumNode {
 					rightNode.addPointer(pointer[i]);
 					pointer[i].parent = rightNode;
 				}
-
 			}
 			int placeForLeft = parent.getPointerNumber(values[0]);
 			if (placeForLeft < 0) {
@@ -377,5 +374,13 @@ public class BBaumNode {
 			}
 		}
 		print(")");
+	}
+
+	
+	public boolean delete(Comparable o) {
+		
+		
+		
+		return false;
 	}
 }

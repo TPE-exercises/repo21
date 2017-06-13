@@ -21,6 +21,13 @@ public interface BBaum {
 	boolean contains (Comparable o);
 	
 	/**
+	 * if Comparable is in the tree, it gets deleted
+	 * @param o comparable to delet
+	 * @return true if it was successful, false else
+	 */
+	boolean delete (Comparable o);
+	
+	/**
 	 * @return int, size of tree
 	 */
 	int size();
