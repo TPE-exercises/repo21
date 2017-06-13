@@ -181,6 +181,23 @@ public class BBaumNode {
 		return false;
 	}
 
+	public Comparable next(Comparable value, boolean gotItFlag){
+		for (int i = 0; i < pointer.length; i++) {
+			if (i < values.length && values[i] != null && values[i] == value) {
+				gotItFlag = true;
+			}
+			if (pointer[i] != null) {
+				return pointer[i].next(value, gotItFlag);
+			}
+			if (i < values.length && values[i] != null) {
+				if(gotItFlag){
+					return values[i];
+				}
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * sort pointer of a node with insertionsort
 	 */
@@ -291,13 +308,11 @@ public class BBaumNode {
 	public Comparable getMin() {
 		if (pointer[0] != null) {
 			return pointer[0].getMin();
-
 		} else {
 			if (values[0] != null) {
 				return values[0];
 			}
 		}
-
 		return null;
 	}
 

@@ -16,7 +16,8 @@ public class BBaumMain {
 		}while(ordnung< 1);		
 		
 		BTree bt = new BTree(ordnung);
-	
+		BBaumIterator bbi = new BBaumIterator(bt);
+		
 		int inp = 0;
 		String inpstr;
 		boolean goOn = true;
@@ -88,6 +89,10 @@ public class BBaumMain {
 				}
 				break; //delete
 
+			case (9):
+				System.out.println("Next Iterate: " + bbi.next());
+				break; // iterate	
+				
 			case (10):
 				bt.printInorder();
 				break; // printInorder
@@ -120,6 +125,7 @@ public class BBaumMain {
 		System.out.println("|6:  smallest number     |");
 		System.out.println("|7:  is Empty            |");
 		System.out.println("|8:  delete number       |");
+		System.out.println("|9:  iterate             |");
 		System.out.println("|10:  Print Inorder      |");
 		System.out.println("|11:  Print Postorder    |");
 		System.out.println("|12:  Print Preorder     |");
