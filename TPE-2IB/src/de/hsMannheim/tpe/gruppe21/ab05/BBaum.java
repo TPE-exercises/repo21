@@ -1,5 +1,7 @@
 package de.hsMannheim.tpe.gruppe21.ab05;
 
+import java.io.FileNotFoundException;
+
 public interface BBaum {
 	/**
 	 * @param int, to insert
@@ -11,8 +13,9 @@ public interface BBaum {
 	 * @param filename of file to insert
 	 * 
 	 * @return boolean, true if insertion was successful
+	 * @throws FileNotFoundException 
 	 */
-	boolean insert (String filename);
+	boolean insert (String filename) throws FileNotFoundException;
 	
 	/**
 	 * @param the int to search

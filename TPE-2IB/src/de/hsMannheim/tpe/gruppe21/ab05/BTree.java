@@ -1,6 +1,6 @@
 package de.hsMannheim.tpe.gruppe21.ab05;
 
-import static gdi.MakeItSimple.*;
+import java.io.*;
 
 public class BTree implements BBaum {
 	
@@ -14,8 +14,11 @@ public class BTree implements BBaum {
 	
 	BTree(int ordnung, String filename){
 		this(ordnung);
-		if(!insert(filename))
-			throw new GDIException("Datei konnte nicht eingelesen werden");
+		try {
+			insert(filename);
+		} catch (FileNotFoundException e) {
+			System.out.println("Datei konnte nicht eingelesen werden");
+		}
 	}
 	
 	public BBaumNode getWurzel(){
@@ -38,16 +41,28 @@ public class BTree implements BBaum {
 	}
 		
 	@Override
-	public boolean insert(String filename) {
-		Object file = openInputFile(filename);
-		boolean temp = true;
-		while (!isEndOfInputFile(file)) {
-			temp = insert(readInt(file)) && temp;
-		}
-		closeInputFile(file);
-		return temp;
+	public boolean insert(String filename) throws FileNotFoundException {
+		BufferedReader br = new BufferedReader(new FileReader(filename));
+			
+		String input = null;
+		try {
+			input = br.readLine();
+		} catch (IOException e) {e.printStackTrace();}		
+		return insertString(input);
 	}
 
+	public boolean insertString(String numberString){
+		boolean temp = true;
+		for(int i = 0; i < numberString.length(); i ++){
+			if(numberString.charAt(i) == ' '){
+				temp = temp && insert(Integer.parseInt(numberString.substring(0, i)));
+				temp = temp && insertString(numberString.substring(i+1, numberString.length()));
+				i = numberString.length();
+			}
+		}
+		return temp;
+	}
+	
 	@Override
 	public boolean contains(Comparable o) {
 		return wurzel.contains(o);
@@ -122,30 +137,30 @@ public class BTree implements BBaum {
 
 	@Override
 	public void printInorder() {
-		println("Inorder: ");
+		System.out.println("Inorder: ");
 		wurzel.printInorder();
-		println();
+		System.out.println();
 	}
 
 	@Override
 	public void printPostorder() {
-		println("Postorder: ");
+		System.out.println("Postorder: ");
 		wurzel.printPostorder();
-		println();
+		System.out.println();
 	}
 
 	@Override
 	public void printPreorder() {
-		println("Preorder: ");
+		System.out.println("Preorder: ");
 		wurzel.printPreorder();
-		println();	
+		System.out.println();	
 	}
 
 	@Override
 	public void printLevelorder() {
-		println("Levelorder: ");
+		System.out.println("Levelorder: ");
 		wurzel.printLevelorder();
-		println();
+		System.out.println();
 	}
 }
 

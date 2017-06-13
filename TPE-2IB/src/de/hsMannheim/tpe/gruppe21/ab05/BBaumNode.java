@@ -1,7 +1,5 @@
 package de.hsMannheim.tpe.gruppe21.ab05;
 
-import static gdi.MakeItSimple.*;
-
 public class BBaumNode {
 
 	private int maxValues;
@@ -127,7 +125,7 @@ public class BBaumNode {
 			}
 			int placeForLeft = parent.getPointerNumber(values[0]);
 			if (placeForLeft < 0) {
-				println("Fehler bei: " + values[0]);
+				System.out.println("Fehler bei: " + values[0]);
 			}
 			parent.pointer[placeForLeft] = leftNode;
 			parent.addPointer(rightNode);
@@ -318,13 +316,13 @@ public class BBaumNode {
 	public void printLevelorder() {
 		for (int i = 0; i < height(); i++) {
 			printLevel(i);
-			println();
+			System.out.println();
 		}
 	}
 
 	public void printLevel(int lvl) {
 		if (lvl == 0) {
-			print(toString());
+			System.out.print(toString());
 		} else {
 			for (int i = 0; i < pointer.length; i++) {
 				if (pointer[i] != null) {
@@ -335,20 +333,20 @@ public class BBaumNode {
 	}
 
 	public void printInorder() {
-		print("(");
+		System.out.print("(");
 		for (int i = 0; i < pointer.length; i++) {
 			if (pointer[i] != null) {
 				pointer[i].printInorder();
 			}
 			if (i < values.length && values[i] != null) {
-				print(values[i] + " ");
+				System.out.print(values[i] + " ");
 			}
 		}
-		print(")");
+		System.out.print(")");
 	}
 
 	public void printPostorder() {
-		print("(");
+		System.out.print("(");
 		for (int i = 0; i < pointer.length; i++) {
 			if (pointer[i] != null) {
 				pointer[i].printPostorder();
@@ -356,17 +354,17 @@ public class BBaumNode {
 		}
 		for (int i = 0; i < values.length; i++) {
 			if (values[i] != null) {
-				print(values[i] + " ");
+				System.out.print(values[i] + " ");
 			}
 		}
-		print(")");
+		System.out.print(")");
 	}
 
 	public void printPreorder() {
-		print("(");
+		System.out.print("(");
 		for (int i = 0; i < values.length; i++) {
 			if (values[i] != null) {
-				print(values[i] + " ");
+				System.out.print(values[i] + " ");
 			}
 		}
 		for (int i = 0; i < pointer.length; i++) {
@@ -374,7 +372,7 @@ public class BBaumNode {
 				pointer[i].printPreorder();
 			}
 		}
-		print(")");
+		System.out.print(")");
 	}
 
 	

@@ -1,15 +1,18 @@
 package de.hsMannheim.tpe.gruppe21.ab05;
 
 import static org.junit.Assert.*;
+
+import java.io.FileNotFoundException;
+
 import org.junit.Test;
-import static gdi.MakeItSimple.*;
 
 public class TestBBaum {
 	@Test
-	public void testAll() {
+	public void testAll() throws FileNotFoundException {
 		BTree testTree = new BTree(10);
 		BTree emptyTree = new BTree(23);
 		assertEquals("Insert(rndmNmbrs.txt): ", true, testTree.insert("rndmNmbrs.txt"));
+		testTree.printInorder();
 		assertEquals("size()): ", 100, testTree.size());
 		assertEquals("size()): ", 0, emptyTree.size());
 		assertEquals("Insert(rndmNmbrs.txt): ", false, testTree.insert("rndmNmbrs.txt"));
