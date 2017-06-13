@@ -181,21 +181,47 @@ public class BBaumNode {
 		return false;
 	}
 
-	public Comparable next(Comparable value, boolean gotItFlag){
-		for (int i = 0; i < pointer.length; i++) {
-			if (i < values.length && values[i] != null && values[i] == value) {
-				gotItFlag = true;
+	private Comparable searchInParentsForNext(Comparable value){
+		for(int i = 0; i < values.length; i++){
+			if(values[i] != null && (values[i].compareTo(value) > 0)){
+				return values[i];
 			}
-			if (pointer[i] != null) {
-				return pointer[i].next(value, gotItFlag);
-			}
-			if (i < values.length && values[i] != null) {
-				if(gotItFlag){
-					return values[i];
+		}
+		if(parent != null){
+			return parent.searchInParentsForNext(value);
+		}
+		return null;
+	}
+	
+	
+	private Comparable nextComparable(Comparable value){
+		for(int i = 0; i < values.length; i++){
+			if(values[i] == value){
+				if(pointer[i+1] != null){
+					return pointer[i+1].getMin();
 				}
+				else if(i<values.length-1 && values[i+1] != null){
+					return values[i+1];
+				}
+				else if(parent!= null){
+					return parent.searchInParentsForNext(value);
+				}
+				
 			}
 		}
 		return null;
+	}
+	
+	
+	public Comparable next(Comparable value){
+		for(int i = 0; i < this.values.length; i++){
+			if(values[i] != null && value.compareTo(values[i]) == 0){
+				return nextComparable(value);
+			}else if(values[i].compareTo(value) > 0){
+				return pointer[i].next(value);
+			}
+		}
+		return pointer[pointer.length-1].next(value);
 	}
 	
 	/**

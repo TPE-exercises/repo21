@@ -12,6 +12,10 @@ public class BBaumIterator implements Iterator {
 		this.value = bt.getMin();
 	}	
 	
+	public Comparable getValue(){
+		return this.value;
+	}
+	
 	@Override
 	public boolean hasNext() {
 		return (bt.getMax().compareTo(value) > 0);
@@ -20,7 +24,7 @@ public class BBaumIterator implements Iterator {
 	@Override
 	public Object next() {
 		if(hasNext()){
-			value = bt.getWurzel().next(value, false);
+			value = bt.getWurzel().next(value);
 			return value;
 		}
 		else{
@@ -31,12 +35,19 @@ public class BBaumIterator implements Iterator {
 
 	@Override
 	public void remove(){
-		bt.delete(value);
+		Comparable safer = value;
+		boolean hadNext;
 		if(hasNext()){
-			value = bt.getWurzel().next(value, false);
+			value = bt.getWurzel().next(value);
+			hadNext = true;
 		}
 		else{
+			hadNext = false;
+		}
+		bt.delete(safer);
+		if(!hadNext){
 			value = bt.getMax();
 		}
+		
 	}
 }

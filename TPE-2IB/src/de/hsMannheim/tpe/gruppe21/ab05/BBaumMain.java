@@ -15,14 +15,11 @@ public class BBaumMain {
 			ordnung = Integer.parseInt(bf.readLine().trim());
 		}while(ordnung< 1);		
 		
-		BTree bt = new BTree(ordnung);
-		BBaumIterator bbi = new BBaumIterator(bt);
-		
+		BTree bt = new BTree(ordnung);		
 		int inp = 0;
 		String inpstr;
 		boolean goOn = true;
 		while (goOn) {
-			System.out.println("-------------------------");
 			printMainMenu();
 			int input = Integer.parseInt(bf.readLine().trim());
 			switch (input) {
@@ -90,7 +87,7 @@ public class BBaumMain {
 				break; //delete
 
 			case (9):
-				System.out.println("Next Iterate: " + bbi.next());
+				iteratorMenu(bt);
 				break; // iterate	
 				
 			case (10):
@@ -115,7 +112,56 @@ public class BBaumMain {
 		}
 	}
 
+	private static void iteratorMenu(BTree bt) {
+		BBaumIterator bbi = new BBaumIterator(bt);		
+		
+		int input = 0;
+		boolean endIterator = false;
+		
+		while(!endIterator){
+			printIteratorMenu(bbi);
+			try {
+				input = Integer.parseInt((new BufferedReader(new InputStreamReader(System.in))).readLine().trim());
+			} catch (NumberFormatException | IOException e) {
+				e.printStackTrace();
+			}
+			
+			switch(input){
+				case(0):
+					if(bbi.hasNext()){
+						System.out.println("hasNext == true");
+					}
+					else{
+						System.out.println("hasNext == false");
+					}
+					break;
+				case(1):
+					Comparable n = (Comparable) bbi.next();
+					System.out.println("Next: " + n);
+					break;
+				case(2):
+					bbi.remove();
+					System.out.println("Removed");
+					break;
+				case(10):
+					endIterator = true;
+					break;
+			}
+		}
+		
+	}
+
+	private static void printIteratorMenu(BBaumIterator bbi) {
+		System.out.println("__________________________");
+		System.out.println("|Current value: " + bbi.getValue());
+		System.out.println("|0:  hasNext             |");
+		System.out.println("|1:  next                |");
+		System.out.println("|2:  remove              |");
+		System.out.println("|10: Stop iterator       |");
+	}
+
 	public static void printMainMenu() {
+		System.out.println("__________________________");
 		System.out.println("|0:  insert number       |");
 		System.out.println("|1:  insert File         |");
 		System.out.println("|2:  contains number     |");
@@ -126,10 +172,10 @@ public class BBaumMain {
 		System.out.println("|7:  is Empty            |");
 		System.out.println("|8:  delete number       |");
 		System.out.println("|9:  iterate             |");
-		System.out.println("|10:  Print Inorder      |");
-		System.out.println("|11:  Print Postorder    |");
-		System.out.println("|12:  Print Preorder     |");
-		System.out.println("|13:  Print Levelorder   |");
+		System.out.println("|10: Print Inorder      |");
+		System.out.println("|11: Print Postorder    |");
+		System.out.println("|12: Print Preorder     |");
+		System.out.println("|13: Print Levelorder   |");
 		
 		
 		System.out.println("|50: STOP                |");
