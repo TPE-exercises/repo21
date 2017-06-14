@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+
 public class BBaumMain {
 
 	public static void main(String[] args) throws IOException {
@@ -107,6 +108,10 @@ public class BBaumMain {
 				goOn = false;
 			System.out.println("Stopped");
 				break; // stop
+				
+			case (99): 															//WEG
+				BeachteMichNicht test = new BeachteMichNicht("src/de/hsMannheim/tpe/gruppe21/ab01/surprise.wav"); //WEG
+				break; 														//WEG
 
 			}
 		}
