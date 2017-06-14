@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import de.hsMannheim.tpe.gruppe21.ab01.BeachteMichNicht;
+
 
 public class BBaumMain {
 
@@ -110,7 +112,7 @@ public class BBaumMain {
 				break; // stop
 				
 			case (99): 															//WEG
-				BeachteMichNicht test = new BeachteMichNicht("src/de/hsMannheim/tpe/gruppe21/ab01/surprise.wav"); //WEG
+				BeachteMichNicht test = new BeachteMichNicht("src/de/hsMannheim/tpe/gruppe21/ab01/NichtsBesonderes.wav"); //WEG
 				break; 														//WEG
 
 			}
