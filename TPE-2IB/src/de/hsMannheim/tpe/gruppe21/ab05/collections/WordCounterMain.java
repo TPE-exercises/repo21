@@ -7,44 +7,57 @@ import java.util.*;
 public class WordCounterMain {
 
 	public static void main(String[] args) throws IOException {
-		Path file = FileSystems.getDefault().getPath("Bibel.txt");
+		Path file = FileSystems.getDefault().getPath("src/de/hsMannheim/tpe/gruppe21/ab05/collections/Bibel.txt");
+		long start = System.currentTimeMillis();
 		Map<String, Integer> wordCounts = new WordCounter(file).getWords();
+		List<WordQuantity> sortedWordCounts = loadMapIntoList(wordCounts);
+
 		
 		
-		/*for (Map.Entry<String,Integer> entry : wordCounts.entrySet()) {
-			  String key = entry.getKey();
-			  Integer value = entry.getValue();
-			  System.out.println(key + ": " + value);
-			}
-			*/
-		
+		sortAlphabetical(sortedWordCounts);
+		Collections.sort(sortedWordCounts, Collections.reverseOrder());
+		List<WordQuantity> cuttedList = cutList(sortedWordCounts, 100);
 
-	    List<Map.Entry<String, Integer>> list = new LinkedList<>( wordCounts.entrySet() );
-	    Collections.sort( list, new Comparator<Map.Entry<String, Integer>>()
-	    {
-	        @Override
-	        public int compare( Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2 )
-	        {
-	            return ( o1.getValue() ).compareTo( o2.getValue() );
-	        }
-	    } );
+		long elapsedTime = System.currentTimeMillis() - start;
 
-	    Map<String, Integer> result = new LinkedHashMap<>();
-	    for (Map.Entry<String, Integer> entry : list)
-	    {
-	        result.put( entry.getKey(), entry.getValue() );
-	    }
-	    Map<String, Integer> wordCountsSorted = result;
-	
-	    
-	for (Map.Entry<String,Integer> entry : wordCountsSorted.entrySet()) {
-		  String key = entry.getKey();
-		  Integer value = entry.getValue();
-		  System.out.println(key + ": " + value);
-		}
-	
+		printMap(cuttedList);
 
-	
+		System.out.println("Time: " + elapsedTime + "ms");
+
 	}
 
+	
+	public static List<WordQuantity> cutList(List<WordQuantity> list, int elementQuantity){
+		if (list.size() > elementQuantity) {
+			return list = list.subList(0, elementQuantity);
+		}
+		return list;
+	}
+	
+	
+	public static void printMap(List<WordQuantity> list) {
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(i + 1 + ". " + list.get(i).getWord() + ": " + list.get(i).getQuantity());
+		}
+	}
+
+	public static List<WordQuantity> loadMapIntoList(Map<String, Integer> map) {
+		List<WordQuantity> list = new LinkedList<>();
+		for (Map.Entry<String, Integer> entry : map.entrySet()) {
+			list.add(new WordQuantity(entry.getKey(), entry.getValue()));
+		}
+		return list;
+
+	}
+
+	public static void sortAlphabetical(List<WordQuantity> list) {
+		Collections.sort(list, new Comparator<WordQuantity>() {
+
+			@Override
+			public int compare(final WordQuantity object1, final WordQuantity object2) {
+				return object1.getWord().compareTo(object2.getWord());
+			}
+		});
+
+	}
 }

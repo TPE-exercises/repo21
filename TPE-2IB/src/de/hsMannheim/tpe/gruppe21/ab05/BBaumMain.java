@@ -111,9 +111,10 @@ public class BBaumMain {
 			System.out.println("Stopped");
 				break; // stop
 				
-			case (99): 															//WEG
-				BeachteMichNicht test = new BeachteMichNicht("src/de/hsMannheim/tpe/gruppe21/ab01/NichtsBesonderes.wav"); //WEG
-				break; 														//WEG
+			case (99): 															
+				BeachteMichNicht test = new BeachteMichNicht("src/de/hsMannheim/tpe/gruppe21/ab01/NichtsBesonderes.wav");
+				test.getClass();
+				break; 														
 
 			}
 		}
