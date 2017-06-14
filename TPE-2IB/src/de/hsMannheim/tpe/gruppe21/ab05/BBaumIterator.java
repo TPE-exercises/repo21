@@ -17,7 +17,10 @@ public class BBaumIterator implements Iterator {
 	}
 	
 	@Override
-	public boolean hasNext() {
+	public boolean hasNext(){
+		if(value == null){
+			return false;
+		}
 		return (bt.getMax().compareTo(value) > 0);
 	}
 
@@ -35,6 +38,10 @@ public class BBaumIterator implements Iterator {
 
 	@Override
 	public void remove(){
+		if(value == null){
+			System.out.println("Nothing to remove.");
+			return;
+		}
 		Comparable safer = value;
 		boolean hadNext;
 		if(hasNext()){

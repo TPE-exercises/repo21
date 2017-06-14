@@ -217,7 +217,7 @@ public class BBaumNode {
 		for(int i = 0; i < this.values.length; i++){
 			if(values[i] != null && value.compareTo(values[i]) == 0){
 				return nextComparable(value);
-			}else if(values[i].compareTo(value) > 0){
+			}else if((values[i] == null || values[i].compareTo(value) > 0) && pointer[i] != null){
 				return pointer[i].next(value);
 			}
 		}
