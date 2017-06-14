@@ -141,7 +141,6 @@ public class BBaumMain {
 					break;
 				case(2):
 					bbi.remove();
-					System.out.println("Removed");
 					break;
 				case(10):
 					endIterator = true;
@@ -172,10 +171,10 @@ public class BBaumMain {
 		System.out.println("|7:  is Empty            |");
 		System.out.println("|8:  delete number       |");
 		System.out.println("|9:  iterate             |");
-		System.out.println("|10: Print Inorder      |");
-		System.out.println("|11: Print Postorder    |");
-		System.out.println("|12: Print Preorder     |");
-		System.out.println("|13: Print Levelorder   |");
+		System.out.println("|10: Print Inorder       |");
+		System.out.println("|11: Print Postorder     |");
+		System.out.println("|12: Print Preorder      |");
+		System.out.println("|13: Print Levelorder    |");
 		
 		
 		System.out.println("|50: STOP                |");

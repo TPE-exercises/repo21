@@ -45,6 +45,7 @@ public class BBaumIterator implements Iterator {
 			hadNext = false;
 		}
 		bt.delete(safer);
+		System.out.println("Removed: " + safer);
 		if(!hadNext){
 			value = bt.getMax();
 		}
