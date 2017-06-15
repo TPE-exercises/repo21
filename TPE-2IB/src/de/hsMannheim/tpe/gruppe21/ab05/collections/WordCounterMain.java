@@ -10,51 +10,79 @@ public class WordCounterMain {
 		Path file = FileSystems.getDefault().getPath("src/de/hsMannheim/tpe/gruppe21/ab05/collections/Bibel.txt");
 		long start = System.currentTimeMillis();
 		Map<String, Integer> wordCounts = new WordCounter(file).getWords();
-		List<WordQuantity> sortedWordCounts = loadMapIntoList(wordCounts);
+		List<WordAndQuantity> sortedWordCounts = loadMapIntoList(wordCounts);
 
 		
 		
 		sortAlphabetical(sortedWordCounts);
+		
+		//Sorts the list by the word quantity
 		Collections.sort(sortedWordCounts, Collections.reverseOrder());
-		List<WordQuantity> cuttedList = cutList(sortedWordCounts, 100);
+		
+		List<WordAndQuantity> cuttedList = cutList(sortedWordCounts, 100);
 
 		long elapsedTime = System.currentTimeMillis() - start;
 
-		printMap(cuttedList);
+		printList(cuttedList);
 
 		System.out.println("Time: " + elapsedTime + "ms");
 
 	}
 
 	
-	public static List<WordQuantity> cutList(List<WordQuantity> list, int elementQuantity){
-		if (list.size() > elementQuantity) {
-			return list = list.subList(0, elementQuantity);
+	
+	/**
+	 * Creates a sub list from the original list with the entered size
+	 * 
+	 * @param list, list to get subList from 
+	 * @param newMaxSize, new max size of the List
+	 * @return subList with entered MaxSize
+	 */
+	public static List<WordAndQuantity> cutList(List<WordAndQuantity> list, int newMaxSize){
+		if (list.size() > newMaxSize) {
+			return list = list.subList(0, newMaxSize);
 		}
 		return list;
 	}
 	
 	
-	public static void printMap(List<WordQuantity> list) {
+	/**
+	 * Prints out the list elements
+	 * 
+	 * @param list to print
+	 */
+	public static void printList(List<WordAndQuantity> list) {
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(i + 1 + ". " + list.get(i).getWord() + ": " + list.get(i).getQuantity());
 		}
 	}
 
-	public static List<WordQuantity> loadMapIntoList(Map<String, Integer> map) {
-		List<WordQuantity> list = new LinkedList<>();
+	
+	/**
+	 * Loads the words and the quantity of them from a map into a list
+	 * 
+	 * @param map with words and the quantity of them
+	 * @return List with WordAndQuantity objects
+	 */
+	public static List<WordAndQuantity> loadMapIntoList(Map<String, Integer> map) {
+		List<WordAndQuantity> list = new LinkedList<>();
 		for (Map.Entry<String, Integer> entry : map.entrySet()) {
-			list.add(new WordQuantity(entry.getKey(), entry.getValue()));
+			list.add(new WordAndQuantity(entry.getKey(), entry.getValue()));
 		}
 		return list;
 
 	}
 
-	public static void sortAlphabetical(List<WordQuantity> list) {
-		Collections.sort(list, new Comparator<WordQuantity>() {
+	
+	/**
+	 * Sorts the List alphabetical
+	 * @param list to sort
+	 */
+	public static void sortAlphabetical(List<WordAndQuantity> list) {
+		Collections.sort(list, new Comparator<WordAndQuantity>() {
 
 			@Override
-			public int compare(final WordQuantity object1, final WordQuantity object2) {
+			public int compare(final WordAndQuantity object1, final WordAndQuantity object2) {
 				return object1.getWord().compareTo(object2.getWord());
 			}
 		});
