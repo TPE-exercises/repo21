@@ -45,7 +45,7 @@ public class WordCounter {
 	 * @param str, String to remove PunctuationMarks from
 	 */
 	private void removePunctuationMarks(String str) {
-		str.replaceAll("\\?|.|,|;|(|)|!|\"|„", "");
+		str.replaceAll(".|,|:|;|\"|!|?" , "");
 	}
 	
 	
