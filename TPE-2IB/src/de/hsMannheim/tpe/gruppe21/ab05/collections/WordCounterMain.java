@@ -13,14 +13,14 @@ public class WordCounterMain {
 		List<WordAndQuantity> sortedWordCounts = loadMapIntoList(wordCounts);
 
 		
-		
-		sortAlphabetical(sortedWordCounts);
-		
 		//Sorts the list by the word quantity
 		Collections.sort(sortedWordCounts, Collections.reverseOrder());
 		
 		List<WordAndQuantity> cuttedList = cutList(sortedWordCounts, 100);
 
+
+		sortAlphabetical(cuttedList);
+		
 		long elapsedTime = System.currentTimeMillis() - start;
 
 		printList(cuttedList);
